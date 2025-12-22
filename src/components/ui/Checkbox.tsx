@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import { Checkbox as BaseCheckbox } from "@base-ui-components/react/checkbox";
+import { Checkbox as BaseCheckbox } from "@base-ui/react/checkbox";
 import { Check, Minus } from "lucide-react";
 
 interface CheckboxProps {
-  checked?: boolean | "indeterminate";
+  checked?: boolean;
+  indeterminate?: boolean;
   onCheckedChange?: (checked: boolean) => void;
   disabled?: boolean;
   label?: string;
@@ -15,6 +16,7 @@ interface CheckboxProps {
 
 export function Checkbox({
   checked = false,
+  indeterminate = false,
   onCheckedChange,
   disabled = false,
   label,
@@ -22,6 +24,7 @@ export function Checkbox({
   id,
 }: CheckboxProps) {
   const checkboxId = id || React.useId();
+  const isActive = checked || indeterminate;
 
   return (
     <div className="flex items-start gap-3">
@@ -30,19 +33,20 @@ export function Checkbox({
         checked={checked}
         onCheckedChange={onCheckedChange}
         disabled={disabled}
+        indeterminate={indeterminate}
         className={`
           w-5 h-5 rounded-md border-2 flex items-center justify-center
           transition-all duration-150 cursor-pointer mt-0.5
           ${disabled ? "opacity-50 cursor-not-allowed" : ""}
           ${
-            checked
+            isActive
               ? "bg-[var(--primary)] border-[var(--primary)]"
               : "bg-transparent border-[var(--input-border)] hover:border-[var(--primary)]"
           }
         `}
       >
         <BaseCheckbox.Indicator className="text-white">
-          {checked === "indeterminate" ? (
+          {indeterminate ? (
             <Minus size={14} strokeWidth={3} />
           ) : (
             <Check size={14} strokeWidth={3} />

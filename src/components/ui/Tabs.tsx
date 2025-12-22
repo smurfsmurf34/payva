@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Tabs as BaseTabs } from "@base-ui-components/react/tabs";
+import { Tabs as BaseTabs } from "@base-ui/react/tabs";
 
 interface TabsProps {
   defaultValue?: string;

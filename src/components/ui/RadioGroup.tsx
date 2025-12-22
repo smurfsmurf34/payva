@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { RadioGroup as BaseRadioGroup } from "@base-ui-components/react/radio-group";
-import { Radio as BaseRadio } from "@base-ui-components/react/radio";
+import { RadioGroup as BaseRadioGroup } from "@base-ui/react/radio-group";
+import { Radio } from "@base-ui/react/radio";
 
 interface RadioGroupProps {
   value?: string;
@@ -22,10 +22,10 @@ export function RadioGroup({
   orientation = "vertical",
 }: RadioGroupProps) {
   return (
-    <BaseRadioGroup.Root
+    <BaseRadioGroup
       value={value}
       defaultValue={defaultValue}
-      onValueChange={onValueChange}
+      onValueChange={onValueChange ? (val) => onValueChange(val as string) : undefined}
       className="space-y-3"
     >
       {label && (
@@ -40,7 +40,7 @@ export function RadioGroup({
       >
         {children}
       </div>
-    </BaseRadioGroup.Root>
+    </BaseRadioGroup>
   );
 }
 
@@ -51,12 +51,12 @@ interface RadioProps {
   disabled?: boolean;
 }
 
-export function Radio({ value, label, description, disabled = false }: RadioProps) {
+export function RadioItem({ value, label, description, disabled = false }: RadioProps) {
   const id = React.useId();
 
   return (
     <div className="flex items-start gap-3">
-      <BaseRadio.Root
+      <Radio.Root
         id={id}
         value={value}
         disabled={disabled}
@@ -68,8 +68,8 @@ export function Radio({ value, label, description, disabled = false }: RadioProp
           data-[checked]:border-[var(--primary)] data-[checked]:bg-[var(--primary)]
         `}
       >
-        <BaseRadio.Indicator className="w-2 h-2 rounded-full bg-white" />
-      </BaseRadio.Root>
+        <Radio.Indicator className="w-2 h-2 rounded-full bg-white" />
+      </Radio.Root>
       {(label || description) && (
         <div className="flex flex-col">
           {label && (
@@ -110,7 +110,7 @@ export function RadioCard({
   const id = React.useId();
 
   return (
-    <BaseRadio.Root
+    <Radio.Root
       id={id}
       value={value}
       disabled={disabled}
@@ -139,8 +139,8 @@ export function RadioCard({
           [[data-checked]_&]:border-[var(--primary)] [[data-checked]_&]:bg-[var(--primary)]
         `}
       >
-        <BaseRadio.Indicator className="w-2 h-2 rounded-full bg-white" />
+        <Radio.Indicator className="w-2 h-2 rounded-full bg-white" />
       </div>
-    </BaseRadio.Root>
+    </Radio.Root>
   );
 }

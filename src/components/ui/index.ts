@@ -16,6 +16,8 @@ export {
   AccordionContent,
   CollapsibleCard,
 } from "./Accordion";
+export { Separator } from "./Separator";
+export { ScrollArea } from "./ScrollArea";
 
 // Forms
 export { Button, AnimatedButton, IconButton, TexturedButton } from "./Button";
@@ -23,12 +25,32 @@ export { Input, Textarea, Select } from "./Input";
 export { Checkbox, CheckboxGroup } from "./Checkbox";
 export { Switch } from "./Switch";
 export { Slider, RangeSlider } from "./Slider";
-export { RadioGroup, Radio, RadioCard } from "./RadioGroup";
+export { RadioGroup, RadioItem, RadioCard } from "./RadioGroup";
+export { Toggle, ToggleGroup, ToggleGroupItem } from "./Toggle";
+export { NumberField, CompactNumberField } from "./NumberField";
+export {
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldError,
+  FieldControl,
+  Fieldset,
+  FieldsetLegend,
+} from "./Field";
 
 // Data Display
 export { Badge } from "./Badge";
+export { Avatar, AvatarGroup } from "./Avatar";
 export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "./Table";
 export { Progress, CircularProgress } from "./Progress";
+export { Meter, GradientMeter } from "./Meter";
+export {
+  PreviewCard,
+  PreviewCardTrigger,
+  PreviewCardContent,
+  UserPreviewCard,
+  LinkPreviewCard,
+} from "./PreviewCard";
 
 // Feedback
 export { ToastProvider, useToast } from "./Toast";
@@ -45,6 +67,14 @@ export {
 // Overlay
 export { Tooltip } from "./Tooltip";
 export {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverDescription,
+  PopoverClose,
+} from "./Popover";
+export {
   Dropdown,
   DropdownTrigger,
   DropdownContent,
@@ -53,7 +83,6 @@ export {
   DropdownLabel,
   DropdownCheckboxItem,
 } from "./Dropdown";
-
 export {
   HoverMenu,
   HoverMenuTrigger,
@@ -65,6 +94,35 @@ export {
   HoverSubmenuTrigger,
   HoverMenuCheckboxItem,
 } from "./HoverMenu";
+export {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuLabel,
+  ContextMenuCheckboxItem,
+  ContextSubmenu,
+  ContextSubmenuTrigger,
+} from "./ContextMenu";
+
+// Navigation
+export {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+  NavigationMenuGrid,
+  NavigationMenuCard,
+} from "./NavigationMenu";
+export {
+  Toolbar,
+  ToolbarButton,
+  ToolbarLink,
+  ToolbarSeparator,
+  ToolbarGroup,
+} from "./Toolbar";
 
 // Loading
 export {

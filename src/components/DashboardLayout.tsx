@@ -1,13 +1,32 @@
 "use client";
 
 import { Sidebar, SidebarProvider, useSidebar } from "./Sidebar";
-import { Menu } from "lucide-react";
+import { Menu, LayoutDashboard, Palette, Settings, Sun, Moon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useTheme } from "./ThemeProvider";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+  DropdownSeparator,
+  DropdownLabel,
+} from "./ui/Dropdown";
 
 function MobileHeader() {
-  const { isMobile, setIsMobileOpen } = useSidebar();
+  const { isMobile } = useSidebar();
+  const { setTheme, resolvedTheme } = useTheme();
+  const pathname = usePathname();
 
   if (!isMobile) return null;
+
+  const navItems = [
+    { href: "/", icon: LayoutDashboard, label: "Dashboard" },
+    { href: "/playground", icon: Palette, label: "Playground" },
+    { href: "/settings", icon: Settings, label: "Settings" },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 h-14 bg-[var(--sidebar-bg)] border-b border-[var(--sidebar-border)] flex items-center justify-between px-4 z-30 md:hidden">
@@ -23,13 +42,36 @@ function MobileHeader() {
         </div>
         <span className="font-semibold text-lg tracking-tight">Canary Canary</span>
       </div>
-      <button
-        onClick={() => setIsMobileOpen(true)}
-        className="p-2 rounded-md text-[var(--muted)] hover:bg-[var(--accent)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
-        title="Open menu"
-      >
-        <Menu size={20} />
-      </button>
+      <Dropdown>
+        <DropdownTrigger className="!p-2 !border-0 !bg-transparent">
+          <Menu size={20} />
+        </DropdownTrigger>
+        <DropdownContent align="end" className="min-w-[200px]">
+          <DropdownLabel>Navigation</DropdownLabel>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href;
+            return (
+              <Link key={item.href} href={item.href}>
+                <DropdownItem
+                  icon={<Icon size={16} />}
+                  className={isActive ? "bg-[var(--accent)]" : ""}
+                >
+                  {item.label}
+                </DropdownItem>
+              </Link>
+            );
+          })}
+          <DropdownSeparator />
+          <DropdownLabel>Theme</DropdownLabel>
+          <DropdownItem
+            icon={resolvedTheme === "dark" ? <Moon size={16} /> : <Sun size={16} />}
+            onSelect={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+          >
+            {resolvedTheme === "dark" ? "Dark Mode" : "Light Mode"}
+          </DropdownItem>
+        </DropdownContent>
+      </Dropdown>
     </header>
   );
 }

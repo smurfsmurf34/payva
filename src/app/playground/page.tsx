@@ -21,7 +21,7 @@ import {
   Slider,
   RangeSlider,
   RadioGroup,
-  Radio,
+  RadioItem,
   RadioCard,
   Badge,
   Table,
@@ -735,10 +735,10 @@ export default function PlaygroundPage() {
                 value={selectedPlan}
                 onValueChange={setSelectedPlan}
               >
-                <Radio value="free" label="Free" description="Basic features" />
-                <Radio value="pro" label="Pro" description="Advanced features" />
-                <Radio value="enterprise" label="Enterprise" description="Custom solutions" />
-                <Radio value="disabled" label="Disabled" disabled />
+                <RadioItem value="free" label="Free" description="Basic features" />
+                <RadioItem value="pro" label="Pro" description="Advanced features" />
+                <RadioItem value="enterprise" label="Enterprise" description="Custom solutions" />
+                <RadioItem value="disabled" label="Disabled" disabled />
               </RadioGroup>
             </Card>
 
@@ -749,10 +749,10 @@ export default function PlaygroundPage() {
                 defaultValue="monthly"
                 orientation="horizontal"
               >
-                <Radio value="daily" label="Daily" />
-                <Radio value="weekly" label="Weekly" />
-                <Radio value="monthly" label="Monthly" />
-                <Radio value="yearly" label="Yearly" />
+                <RadioItem value="daily" label="Daily" />
+                <RadioItem value="weekly" label="Weekly" />
+                <RadioItem value="monthly" label="Monthly" />
+                <RadioItem value="yearly" label="Yearly" />
               </RadioGroup>
             </Card>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Progress as BaseProgress } from "@base-ui-components/react/progress";
+import { Progress as BaseProgress } from "@base-ui/react/progress";
 
 interface ProgressProps {
   value?: number;

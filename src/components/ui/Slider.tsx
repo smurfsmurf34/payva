@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Slider as BaseSlider } from "@base-ui-components/react/slider";
+import { Slider as BaseSlider } from "@base-ui/react/slider";
 
 interface SliderProps {
   value?: number;

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Collapsible } from "@base-ui-components/react/collapsible";
+import { Collapsible } from "@base-ui/react/collapsible";
 import { ChevronDown } from "lucide-react";
 
 interface AccordionProps {

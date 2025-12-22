@@ -72,6 +72,7 @@ interface DropdownItemProps {
   disabled?: boolean;
   destructive?: boolean;
   icon?: React.ReactNode;
+  className?: string;
 }
 
 export function DropdownItem({
@@ -80,6 +81,7 @@ export function DropdownItem({
   disabled = false,
   destructive = false,
   icon,
+  className = "",
 }: DropdownItemProps) {
   return (
     <Menu.Item
@@ -96,6 +98,7 @@ export function DropdownItem({
             ? "text-[var(--danger)] hover:bg-[var(--danger-light)] focus:bg-[var(--danger-light)]"
             : "text-[var(--foreground)] hover:bg-[var(--accent)] focus:bg-[var(--accent)]"
         }
+        ${className}
       `}
     >
       {icon && <span className="flex-shrink-0">{icon}</span>}
