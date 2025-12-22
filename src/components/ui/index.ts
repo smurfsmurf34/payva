@@ -1,13 +1,34 @@
 // Layout
 export { Card, CardHeader, StatCard, GradientCard, MetricCard } from "./Card";
+export {
+  Tabs,
+  TabsList,
+  Tab,
+  TabPanel,
+  TabsPills,
+  TabsPillsList,
+  TabPill,
+} from "./Tabs";
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  CollapsibleCard,
+} from "./Accordion";
 
 // Forms
 export { Button, AnimatedButton, IconButton, TexturedButton } from "./Button";
 export { Input, Textarea, Select } from "./Input";
+export { Checkbox, CheckboxGroup } from "./Checkbox";
+export { Switch } from "./Switch";
+export { Slider, RangeSlider } from "./Slider";
+export { RadioGroup, Radio, RadioCard } from "./RadioGroup";
 
 // Data Display
 export { Badge } from "./Badge";
 export { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "./Table";
+export { Progress, CircularProgress } from "./Progress";
 
 // Feedback
 export { ToastProvider, useToast } from "./Toast";
@@ -44,8 +65,6 @@ export {
   HoverSubmenuTrigger,
   HoverMenuCheckboxItem,
 } from "./HoverMenu";
-
-export { ThemeColorPicker } from "./ThemeColorPicker";
 
 // Loading
 export {

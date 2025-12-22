@@ -785,6 +785,25 @@ body {
   animation: glowPulse 2s var(--ease-in-out) infinite;
 }
 
+/* Accordion animations */
+@keyframes accordion-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--collapsible-panel-height); opacity: 1; }
+}
+
+@keyframes accordion-up {
+  from { height: var(--collapsible-panel-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+
+.animate-accordion-down {
+  animation: accordion-down 200ms ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 200ms ease-out;
+}
+
 /* ============================================
    SCROLLBAR STYLING - Refined
    ============================================ */

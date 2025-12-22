@@ -15,6 +15,14 @@ import {
   Input,
   Textarea,
   Select,
+  Checkbox,
+  CheckboxGroup,
+  Switch,
+  Slider,
+  RangeSlider,
+  RadioGroup,
+  Radio,
+  RadioCard,
   Badge,
   Table,
   TableHeader,
@@ -22,6 +30,17 @@ import {
   TableRow,
   TableHead,
   TableCell,
+  Tabs,
+  TabsList,
+  Tab,
+  TabPanel,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  CollapsibleCard,
+  Progress,
+  CircularProgress,
   useToast,
   Modal,
   ModalContent,
@@ -46,7 +65,6 @@ import {
   HoverSubmenu,
   HoverSubmenuTrigger,
   HoverMenuCheckboxItem,
-  ThemeColorPicker,
   Skeleton,
   SkeletonText,
   SkeletonAvatar,
@@ -102,20 +120,28 @@ export default function PlaygroundPage() {
   const [inputValue, setInputValue] = useState("");
   const [selectValue, setSelectValue] = useState("option1");
 
+  // New component states
+  const [formCheckboxes, setFormCheckboxes] = useState({
+    terms: false,
+    marketing: true,
+    analytics: false,
+  });
+  const [darkMode, setDarkMode] = useState(false);
+  const [emailNotifications, setEmailNotifications] = useState(true);
+  const [sliderValue, setSliderValue] = useState(50);
+  const [rangeValue, setRangeValue] = useState<[number, number]>([25, 75]);
+  const [selectedPlan, setSelectedPlan] = useState("pro");
+  const [selectedTab, setSelectedTab] = useState("overview");
+
   return (
     <DashboardLayout>
       <div className="space-y-12">
-        {/* Header with Theme Picker */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">UI Components Playground</h1>
-            <p className="text-[var(--muted)] mt-2">
-              Interactive showcase of all available UI components
-            </p>
-          </div>
-          <Card className="w-full lg:w-auto lg:min-w-[360px]">
-            <ThemeColorPicker />
-          </Card>
+        {/* Header */}
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">UI Components Playground</h1>
+          <p className="text-[var(--muted)] mt-2">
+            Interactive showcase of all available UI components
+          </p>
         </div>
 
         {/* Typography Section */}
@@ -572,6 +598,276 @@ export default function PlaygroundPage() {
                     { value: "option3", label: "Option 3" },
                   ]}
                 />
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* Checkboxes & Switches Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Checkboxes & Switches
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Checkboxes" description="Multi-select options" />
+              <CheckboxGroup label="Preferences">
+                <Checkbox
+                  checked={formCheckboxes.terms}
+                  onCheckedChange={(c) => setFormCheckboxes({ ...formCheckboxes, terms: c as boolean })}
+                  label="Accept terms and conditions"
+                  description="Required to continue"
+                />
+                <Checkbox
+                  checked={formCheckboxes.marketing}
+                  onCheckedChange={(c) => setFormCheckboxes({ ...formCheckboxes, marketing: c as boolean })}
+                  label="Receive marketing emails"
+                />
+                <Checkbox
+                  checked={formCheckboxes.analytics}
+                  onCheckedChange={(c) => setFormCheckboxes({ ...formCheckboxes, analytics: c as boolean })}
+                  label="Share analytics data"
+                  description="Helps us improve the product"
+                />
+                <Checkbox
+                  checked={false}
+                  disabled
+                  label="Disabled option"
+                />
+              </CheckboxGroup>
+            </Card>
+
+            <Card>
+              <CardHeader title="Switches" description="Toggle settings" />
+              <div className="space-y-4">
+                <Switch
+                  checked={darkMode}
+                  onCheckedChange={setDarkMode}
+                  label="Dark mode"
+                  description="Use dark theme"
+                />
+                <Switch
+                  checked={emailNotifications}
+                  onCheckedChange={setEmailNotifications}
+                  label="Email notifications"
+                />
+                <Switch
+                  checked={false}
+                  disabled
+                  label="Disabled switch"
+                />
+                <div className="pt-2 border-t border-[var(--card-border)]">
+                  <p className="text-xs text-[var(--muted)] mb-3">Size variants</p>
+                  <div className="flex items-center gap-6">
+                    <Switch checked size="sm" label="Small" />
+                    <Switch checked size="md" label="Medium" />
+                    <Switch checked size="lg" label="Large" />
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* Sliders Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Sliders
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Single Slider" description="Select a single value" />
+              <div className="space-y-6">
+                <Slider
+                  label="Volume"
+                  value={sliderValue}
+                  onValueChange={setSliderValue}
+                  showValue
+                />
+                <Slider
+                  label="Brightness"
+                  defaultValue={75}
+                  showValue
+                />
+                <Slider
+                  label="Disabled"
+                  defaultValue={30}
+                  disabled
+                  showValue
+                />
+              </div>
+            </Card>
+
+            <Card>
+              <CardHeader title="Range Slider" description="Select a range of values" />
+              <div className="space-y-6">
+                <RangeSlider
+                  label="Price Range"
+                  value={rangeValue}
+                  onValueChange={setRangeValue}
+                  min={0}
+                  max={100}
+                  showValue
+                />
+                <RangeSlider
+                  label="Date Range"
+                  defaultValue={[10, 90]}
+                  showValue
+                />
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* Radio Groups Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Radio Groups
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Basic Radio Group" description="Single selection" />
+              <RadioGroup
+                label="Select a plan"
+                value={selectedPlan}
+                onValueChange={setSelectedPlan}
+              >
+                <Radio value="free" label="Free" description="Basic features" />
+                <Radio value="pro" label="Pro" description="Advanced features" />
+                <Radio value="enterprise" label="Enterprise" description="Custom solutions" />
+                <Radio value="disabled" label="Disabled" disabled />
+              </RadioGroup>
+            </Card>
+
+            <Card>
+              <CardHeader title="Horizontal Layout" description="Inline options" />
+              <RadioGroup
+                label="Frequency"
+                defaultValue="monthly"
+                orientation="horizontal"
+              >
+                <Radio value="daily" label="Daily" />
+                <Radio value="weekly" label="Weekly" />
+                <Radio value="monthly" label="Monthly" />
+                <Radio value="yearly" label="Yearly" />
+              </RadioGroup>
+            </Card>
+          </div>
+        </section>
+
+        {/* Tabs Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Tabs
+          </h2>
+
+          <Card>
+            <CardHeader title="Standard Tabs" description="Segmented content navigation" />
+            <Tabs value={selectedTab} onValueChange={setSelectedTab}>
+              <TabsList>
+                <Tab value="overview">Overview</Tab>
+                <Tab value="analytics">Analytics</Tab>
+                <Tab value="reports">Reports</Tab>
+                <Tab value="settings">Settings</Tab>
+              </TabsList>
+              <TabPanel value="overview">
+                <p className="text-[var(--muted)]">Overview content goes here. This is the main dashboard view.</p>
+              </TabPanel>
+              <TabPanel value="analytics">
+                <p className="text-[var(--muted)]">Analytics content with charts and metrics would appear here.</p>
+              </TabPanel>
+              <TabPanel value="reports">
+                <p className="text-[var(--muted)]">Reports and downloadable data exports.</p>
+              </TabPanel>
+              <TabPanel value="settings">
+                <p className="text-[var(--muted)]">Settings and configuration options.</p>
+              </TabPanel>
+            </Tabs>
+          </Card>
+        </section>
+
+        {/* Progress Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Progress
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Linear Progress" description="Horizontal progress bars" />
+              <div className="space-y-6">
+                <Progress value={75} label="Upload Progress" showValue />
+                <Progress value={45} label="Success" variant="success" showValue />
+                <Progress value={60} label="Warning" variant="warning" showValue />
+                <Progress value={30} label="Danger" variant="danger" showValue />
+                <div className="pt-2 border-t border-[var(--card-border)]">
+                  <p className="text-xs text-[var(--muted)] mb-3">Size variants</p>
+                  <div className="space-y-3">
+                    <Progress value={50} size="sm" />
+                    <Progress value={50} size="md" />
+                    <Progress value={50} size="lg" />
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            <Card>
+              <CardHeader title="Circular Progress" description="Radial progress indicators" />
+              <div className="flex flex-wrap items-end gap-6">
+                <CircularProgress value={75} />
+                <CircularProgress value={45} variant="success" />
+                <CircularProgress value={60} variant="warning" />
+                <CircularProgress value={30} variant="danger" />
+                <CircularProgress value={90} size={48} strokeWidth={4} />
+                <CircularProgress value={65} size={80} strokeWidth={8} />
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* Accordion Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Accordion
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Single Accordion" description="One panel open at a time" />
+              <Accordion type="single" defaultValue={["item-1"]}>
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>What is Base UI?</AccordionTrigger>
+                  <AccordionContent>
+                    Base UI is a library of unstyled, accessible components that you can customize to match your design system.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2">
+                  <AccordionTrigger>How do I customize components?</AccordionTrigger>
+                  <AccordionContent>
+                    You can customize components using CSS variables defined in globals.css and Tailwind utility classes.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                  <AccordionContent>
+                    Yes! All components follow WAI-ARIA guidelines and support keyboard navigation.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </Card>
+
+            <Card>
+              <CardHeader title="Collapsible Card" description="Standalone collapsible" />
+              <div className="space-y-3">
+                <CollapsibleCard title="Click to expand" defaultOpen>
+                  This is the content inside a collapsible card. It can contain any content you need.
+                </CollapsibleCard>
+                <CollapsibleCard title="Another collapsible">
+                  More content here. Use this for FAQ sections, settings panels, or any content that benefits from being hidden by default.
+                </CollapsibleCard>
               </div>
             </Card>
           </div>
