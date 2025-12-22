@@ -173,12 +173,12 @@
   --sidebar-border: #EBEBEB;
   --sidebar-hover: #F7F7F5;
 
-  /* Primary - Deep violet (luxe, premium) */
-  --primary: #6D28D9;
-  --primary-hover: #5B21B6;
-  --primary-active: #4C1D95;
-  --primary-light: #EDE9FE;
-  --primary-lighter: #F5F3FF;
+  /* Primary - Sky blue */
+  --primary: #00A6FF;
+  --primary-hover: #0095E6;
+  --primary-active: #0084CC;
+  --primary-light: #CCE9FF;
+  --primary-lighter: #E6F4FF;
 
   /* Accent - Gold/Yellow (premium touch) */
   --accent-gold: #F3D104;
@@ -264,12 +264,12 @@
   --sidebar-border: #27272A;
   --sidebar-hover: #1C1C1F;
 
-  /* Primary - Glowing violet */
-  --primary: #8B5CF6;
-  --primary-hover: #A78BFA;
-  --primary-active: #7C3AED;
-  --primary-light: #2E1065;
-  --primary-lighter: #1E1033;
+  /* Primary - Sky blue */
+  --primary: #00A6FF;
+  --primary-hover: #33B8FF;
+  --primary-active: #0095E6;
+  --primary-light: #003D5C;
+  --primary-lighter: #001F2E;
 
   /* Accent - Gold/Yellow */
   --accent-gold: #F3D104;

@@ -6,12 +6,18 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Settings,
-  ChevronLeft,
-  ChevronRight,
+  PanelLeftClose,
+  PanelLeft,
   Palette,
   Sparkles,
 } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import {
+  HoverMenu,
+  HoverMenuTrigger,
+  HoverMenuContent,
+  HoverMenuItem,
+} from "./ui/HoverMenu";
 
 // Context for sidebar collapsed state
 const SidebarContext = createContext<{
@@ -82,23 +88,40 @@ export function Sidebar() {
     >
       {/* Logo */}
       <div
-        className={`
-        flex items-center h-16 px-4 border-b border-[var(--sidebar-border)]
-        ${isCollapsed ? "justify-center" : "justify-between"}
-      `}
+        className="flex items-center justify-between h-16 px-4 border-b border-[var(--sidebar-border)]"
       >
-        {!isCollapsed && (
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center">
-              <Sparkles size={18} className="text-[#FFFFFC]" />
+        {isCollapsed ? (
+          <HoverMenu>
+            <HoverMenuTrigger className="!p-0 !border-0 !bg-transparent">
+              <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center flex-shrink-0">
+                <Sparkles size={18} className="text-[#FFFFFC]" />
+              </div>
+            </HoverMenuTrigger>
+            <HoverMenuContent side="right" align="start">
+              <HoverMenuItem
+                icon={<PanelLeft size={16} />}
+                onSelect={() => setIsCollapsed(false)}
+              >
+                Expand sidebar
+              </HoverMenuItem>
+            </HoverMenuContent>
+          </HoverMenu>
+        ) : (
+          <>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center flex-shrink-0">
+                <Sparkles size={18} className="text-[#FFFFFC]" />
+              </div>
+              <span className="font-semibold text-lg tracking-tight">Canary</span>
             </div>
-            <span className="font-semibold text-lg tracking-tight">Canary</span>
-          </div>
-        )}
-        {isCollapsed && (
-          <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center">
-            <Sparkles size={18} className="text-[#FFFFFC]" />
-          </div>
+            <button
+              onClick={() => setIsCollapsed(true)}
+              className="p-1.5 rounded-md text-[var(--muted)] hover:bg-[var(--accent)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
+              title="Collapse sidebar"
+            >
+              <PanelLeftClose size={18} />
+            </button>
+          </>
         )}
       </div>
 
@@ -132,22 +155,6 @@ export function Sidebar() {
 
         {/* Theme toggle */}
         <ThemeToggle isCollapsed={isCollapsed} />
-
-        {/* Collapse toggle */}
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="flex items-center justify-center w-full px-3 py-2.5 rounded-lg text-[var(--muted)] hover:bg-[var(--accent)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
-          title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          {isCollapsed ? (
-            <ChevronRight size={20} />
-          ) : (
-            <>
-              <ChevronLeft size={20} />
-              <span className="ml-3 font-medium text-sm">Collapse</span>
-            </>
-          )}
-        </button>
       </div>
     </aside>
   );
