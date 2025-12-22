@@ -14,7 +14,7 @@ export function HoverMenu({ children }: HoverMenuProps) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout>>();
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const handleOpen = () => {
     clearTimeout(closeTimer.current);
