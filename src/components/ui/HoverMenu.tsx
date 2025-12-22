@@ -38,7 +38,7 @@ export function HoverMenu({ children }: HoverMenuProps) {
       >
         {React.Children.map(children, (child) => {
           if (React.isValidElement(child) && child.type === HoverMenuContent) {
-            return React.cloneElement(child as React.ReactElement<HoverMenuContentProps & { _onEnter?: () => void; _onLeave?: () => void; _popupRef?: React.RefObject<HTMLDivElement> }>, {
+            return React.cloneElement(child as React.ReactElement<HoverMenuContentProps & { _onEnter?: () => void; _onLeave?: () => void; _popupRef?: React.RefObject<HTMLDivElement | null> }>, {
               _onEnter: handleOpen,
               _onLeave: handleClose,
               _popupRef: popupRef,
