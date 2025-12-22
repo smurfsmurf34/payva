@@ -201,7 +201,7 @@ interface MenubarSubmenuProps {
 }
 
 export function MenubarSubmenu({ children }: MenubarSubmenuProps) {
-  return <BaseMenu.Root>{children}</BaseMenu.Root>;
+  return <BaseMenu.SubmenuRoot>{children}</BaseMenu.SubmenuRoot>;
 }
 
 interface MenubarSubmenuTriggerProps {
