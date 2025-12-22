@@ -9,7 +9,7 @@ interface DropdownProps {
 }
 
 export function Dropdown({ children }: DropdownProps) {
-  return <Menu.Root>{children}</Menu.Root>;
+  return <Menu.Root modal={false}>{children}</Menu.Root>;
 }
 
 interface DropdownTriggerProps {

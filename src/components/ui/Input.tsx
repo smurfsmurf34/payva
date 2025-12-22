@@ -129,7 +129,7 @@ export function Select({
           {label}
         </label>
       )}
-      <Menu.Root open={open} onOpenChange={setOpen}>
+      <Menu.Root open={open} onOpenChange={setOpen} modal={false}>
         <Menu.Trigger
           disabled={disabled}
           className={`

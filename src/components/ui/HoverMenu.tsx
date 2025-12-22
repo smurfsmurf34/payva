@@ -29,7 +29,7 @@ export function HoverMenu({ children }: HoverMenuProps) {
   };
 
   return (
-    <Menu.Root open={open} onOpenChange={setOpen}>
+    <Menu.Root open={open} onOpenChange={setOpen} modal={false}>
       <div
         ref={containerRef}
         onMouseEnter={handleOpen}

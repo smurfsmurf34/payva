@@ -12,7 +12,7 @@ interface PopoverProps {
 
 export function Popover({ children, defaultOpen, open, onOpenChange }: PopoverProps) {
   return (
-    <BasePopover.Root defaultOpen={defaultOpen} open={open} onOpenChange={onOpenChange}>
+    <BasePopover.Root defaultOpen={defaultOpen} open={open} onOpenChange={onOpenChange} modal={false}>
       {children}
     </BasePopover.Root>
   );

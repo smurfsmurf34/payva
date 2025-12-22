@@ -30,7 +30,7 @@ interface MenubarMenuProps {
 }
 
 export function MenubarMenu({ children }: MenubarMenuProps) {
-  return <BaseMenu.Root>{children}</BaseMenu.Root>;
+  return <BaseMenu.Root modal={false}>{children}</BaseMenu.Root>;
 }
 
 interface MenubarTriggerProps {
