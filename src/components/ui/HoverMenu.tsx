@@ -78,7 +78,7 @@ interface HoverMenuContentProps {
   className?: string;
   _onEnter?: () => void;
   _onLeave?: () => void;
-  _popupRef?: React.RefObject<HTMLDivElement>;
+  _popupRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 export function HoverMenuContent({
