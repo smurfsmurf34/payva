@@ -29,9 +29,10 @@ export function Slider({
   const [internalValue, setInternalValue] = React.useState(defaultValue);
   const currentValue = value ?? internalValue;
 
-  const handleChange = (newValue: number) => {
-    setInternalValue(newValue);
-    onValueChange?.(newValue);
+  const handleChange = (newValue: number[]) => {
+    const val = newValue[0];
+    setInternalValue(val);
+    onValueChange?.(val);
   };
 
   return (
@@ -51,7 +52,7 @@ export function Slider({
         </div>
       )}
       <BaseSlider.Root
-        value={currentValue}
+        value={[currentValue]}
         onValueChange={handleChange}
         min={min}
         max={max}
@@ -62,17 +63,19 @@ export function Slider({
           ${disabled ? "opacity-50 cursor-not-allowed" : ""}
         `}
       >
-        <BaseSlider.Track className="relative h-2 w-full rounded-full bg-[var(--accent)]">
-          <BaseSlider.Indicator className="absolute h-full rounded-full bg-[var(--primary)]" />
-          <BaseSlider.Thumb
-            className={`
-              block w-5 h-5 rounded-full bg-white border-2 border-[var(--primary)]
-              shadow-md transition-transform
-              hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2
-              ${disabled ? "" : "cursor-grab active:cursor-grabbing"}
-            `}
-          />
-        </BaseSlider.Track>
+        <BaseSlider.Control className="flex items-center w-full">
+          <BaseSlider.Track className="relative h-2 w-full rounded-full bg-[var(--accent)]">
+            <BaseSlider.Indicator className="absolute h-full rounded-full bg-[var(--primary)]" />
+            <BaseSlider.Thumb
+              className={`
+                block w-5 h-5 rounded-full bg-white border-2 border-[var(--primary)]
+                shadow-md transition-transform
+                hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2
+                ${disabled ? "" : "cursor-grab active:cursor-grabbing"}
+              `}
+            />
+          </BaseSlider.Track>
+        </BaseSlider.Control>
       </BaseSlider.Root>
     </div>
   );

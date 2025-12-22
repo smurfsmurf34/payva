@@ -55,7 +55,7 @@ export function Tab({ value, children, disabled = false }: TabProps) {
         flex-1 px-4 py-2 text-sm font-medium rounded-md
         transition-all duration-200 cursor-pointer
         text-[var(--muted)] hover:text-[var(--foreground)]
-        data-[selected]:bg-[var(--card-bg)] data-[selected]:text-[var(--foreground)] data-[selected]:shadow-sm
+        data-[active]:bg-[var(--card-bg)] data-[active]:text-[var(--foreground)] data-[active]:shadow-sm
         ${disabled ? "opacity-50 cursor-not-allowed" : ""}
         focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2
       `}
@@ -128,7 +128,7 @@ export function TabPill({ value, children, disabled = false }: TabProps) {
         transition-all duration-200 cursor-pointer
         border border-transparent
         text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--accent)]
-        data-[selected]:bg-[var(--primary)] data-[selected]:text-white data-[selected]:border-[var(--primary)]
+        data-[active]:bg-[var(--primary)] data-[active]:text-white data-[active]:border-[var(--primary)]
         ${disabled ? "opacity-50 cursor-not-allowed" : ""}
         focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] focus-visible:ring-offset-2
       `}

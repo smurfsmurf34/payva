@@ -55,14 +55,15 @@ export function RadioItem({ value, label, description, disabled = false }: Radio
   const id = React.useId();
 
   return (
-    <div className="flex items-start gap-3">
+    <div className={`flex gap-3 ${description ? "items-start" : "items-center"}`}>
       <Radio.Root
         id={id}
         value={value}
         disabled={disabled}
         className={`
-          w-5 h-5 rounded-full border-2 flex items-center justify-center
-          transition-all duration-150 cursor-pointer mt-0.5
+          w-5 h-5 rounded-full border-2 flex items-center justify-center flex-shrink-0
+          transition-all duration-150 cursor-pointer
+          ${description ? "mt-0.5" : ""}
           ${disabled ? "opacity-50 cursor-not-allowed" : ""}
           border-[var(--input-border)] hover:border-[var(--primary)]
           data-[checked]:border-[var(--primary)] data-[checked]:bg-[var(--primary)]

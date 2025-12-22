@@ -72,6 +72,47 @@ import {
   SkeletonTable,
   SkeletonStat,
   SkeletonList,
+  // New components
+  Avatar,
+  AvatarGroup,
+  Separator,
+  Toggle,
+  ToggleGroup,
+  ToggleGroupItem,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverDescription,
+  NumberField,
+  CompactNumberField,
+  ScrollArea,
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldError,
+  Fieldset,
+  FieldsetLegend,
+  Meter,
+  GradientMeter,
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuLabel,
+  ContextMenuCheckboxItem,
+  Toolbar,
+  ToolbarButton,
+  ToolbarSeparator,
+  ToolbarGroup,
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuTrigger,
+  NavigationMenuContent,
+  NavigationMenuLink,
+  NavigationMenuGrid,
+  NavigationMenuCard,
 } from "@/components/ui";
 import {
   Package,
@@ -1021,6 +1062,382 @@ export default function PlaygroundPage() {
               </div>
             </Card>
           </div>
+        </section>
+
+        {/* Avatar Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Avatar
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Avatar Sizes" description="Different sizes with fallback initials" />
+              <div className="flex items-end gap-4">
+                <Avatar size="sm" alt="John Doe" />
+                <Avatar size="md" alt="Jane Smith" />
+                <Avatar size="lg" alt="Bob Wilson" />
+                <Avatar size="xl" alt="Alice Brown" />
+              </div>
+            </Card>
+
+            <Card>
+              <CardHeader title="Avatar Group" description="Stacked avatars for teams" />
+              <div className="space-y-4">
+                <AvatarGroup max={4}>
+                  <Avatar alt="John Doe" />
+                  <Avatar alt="Jane Smith" />
+                  <Avatar alt="Bob Wilson" />
+                  <Avatar alt="Alice Brown" />
+                  <Avatar alt="Charlie Green" />
+                  <Avatar alt="Diana Prince" />
+                </AvatarGroup>
+                <p className="text-sm text-[var(--muted)]">Shows +2 overflow indicator</p>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* Separator Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Separator
+          </h2>
+
+          <Card>
+            <CardHeader title="Separator Variants" description="Horizontal and labeled dividers" />
+            <div className="space-y-6">
+              <div>
+                <p className="text-sm text-[var(--muted)] mb-3">Horizontal</p>
+                <Separator />
+              </div>
+              <div>
+                <p className="text-sm text-[var(--muted)] mb-3">With Label</p>
+                <Separator label="or continue with" />
+              </div>
+              <div>
+                <p className="text-sm text-[var(--muted)] mb-3">Vertical (in flex container)</p>
+                <div className="flex items-center gap-4 h-8">
+                  <span>Left content</span>
+                  <Separator orientation="vertical" />
+                  <span>Right content</span>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </section>
+
+        {/* Toggle Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Toggle
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Single Toggle" description="Toggle buttons with variants" />
+              <div className="flex flex-wrap gap-4">
+                <Toggle>
+                  <Star size={18} weight="duotone" />
+                  Star
+                </Toggle>
+                <Toggle variant="outline">
+                  <Heart size={18} weight="duotone" />
+                  Like
+                </Toggle>
+                <Toggle defaultPressed>
+                  <Bell size={18} weight="duotone" />
+                  Notify
+                </Toggle>
+              </div>
+            </Card>
+
+            <Card>
+              <CardHeader title="Toggle Group" description="Multi-select toggle group" />
+              <ToggleGroup defaultValue={["bold"]}>
+                <ToggleGroupItem value="bold">Bold</ToggleGroupItem>
+                <ToggleGroupItem value="italic">Italic</ToggleGroupItem>
+                <ToggleGroupItem value="underline">Underline</ToggleGroupItem>
+              </ToggleGroup>
+            </Card>
+          </div>
+        </section>
+
+        {/* Popover Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Popover
+          </h2>
+
+          <Card>
+            <CardHeader title="Popover" description="Floating content panels" />
+            <div className="flex flex-wrap gap-4">
+              <Popover>
+                <PopoverTrigger>
+                  <Button variant="outline">Open Popover</Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverHeader>Settings</PopoverHeader>
+                  <PopoverDescription>
+                    Configure your notification preferences here.
+                  </PopoverDescription>
+                  <div className="mt-4 space-y-3">
+                    <Switch label="Email notifications" checked />
+                    <Switch label="Push notifications" />
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </div>
+          </Card>
+        </section>
+
+        {/* NumberField Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Number Field
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Number Field" description="Numeric input with stepper" />
+              <div className="space-y-4">
+                <NumberField label="Quantity" defaultValue={1} min={0} max={100} />
+                <NumberField label="Price" defaultValue={99} step={1} min={0} max={1000} />
+              </div>
+            </Card>
+
+            <Card>
+              <CardHeader title="Compact Number Field" description="Inline stepper variant" />
+              <div className="flex items-center gap-6">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm">Items:</span>
+                  <CompactNumberField defaultValue={5} min={1} max={10} />
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-[var(--muted)]">Disabled:</span>
+                  <CompactNumberField defaultValue={3} disabled />
+                </div>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* ScrollArea Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Scroll Area
+          </h2>
+
+          <Card>
+            <CardHeader title="Custom Scrollbar" description="Styled scrollable container" />
+            <ScrollArea className="h-48 w-full border border-[var(--card-border)] rounded-lg p-4">
+              <div className="space-y-4">
+                {Array.from({ length: 20 }).map((_, i) => (
+                  <div key={i} className="p-3 bg-[var(--accent)] rounded-lg">
+                    <p className="text-sm">Scrollable item {i + 1}</p>
+                    <p className="text-xs text-[var(--muted)]">This is some example content in the scroll area.</p>
+                  </div>
+                ))}
+              </div>
+            </ScrollArea>
+          </Card>
+        </section>
+
+        {/* Field Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Field & Fieldset
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Field Components" description="Form field with label, description, error" />
+              <div className="space-y-4">
+                <Field>
+                  <FieldLabel>Email Address</FieldLabel>
+                  <FieldDescription>We will never share your email.</FieldDescription>
+                  <input
+                    type="email"
+                    className="w-full px-3 py-2 bg-[var(--accent)] border border-[var(--card-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                    placeholder="you@example.com"
+                  />
+                </Field>
+                <Field invalid>
+                  <FieldLabel>Password</FieldLabel>
+                  <input
+                    type="password"
+                    className="w-full px-3 py-2 bg-[var(--accent)] border border-[var(--danger)] rounded-lg"
+                    placeholder="••••••••"
+                  />
+                  <FieldError>Password must be at least 8 characters.</FieldError>
+                </Field>
+              </div>
+            </Card>
+
+            <Card>
+              <CardHeader title="Fieldset" description="Group related fields" />
+              <Fieldset>
+                <FieldsetLegend>Personal Information</FieldsetLegend>
+                <div className="space-y-4">
+                  <Field>
+                    <FieldLabel>First Name</FieldLabel>
+                    <input
+                      type="text"
+                      className="w-full px-3 py-2 bg-[var(--accent)] border border-[var(--card-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                    />
+                  </Field>
+                  <Field>
+                    <FieldLabel>Last Name</FieldLabel>
+                    <input
+                      type="text"
+                      className="w-full px-3 py-2 bg-[var(--accent)] border border-[var(--card-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                    />
+                  </Field>
+                </div>
+              </Fieldset>
+            </Card>
+          </div>
+        </section>
+
+        {/* Meter Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Meter
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Meter Variants" description="Visual value indicators" />
+              <div className="space-y-4">
+                <Meter label="Storage Used" value={75} showValue />
+                <Meter label="Battery" value={20} variant="danger" showValue />
+                <Meter label="Performance" value={90} variant="success" showValue />
+              </div>
+            </Card>
+
+            <Card>
+              <CardHeader title="Gradient Meter" description="With gradient fill" />
+              <div className="space-y-4">
+                <GradientMeter label="Overall Score" value={85} showValue />
+                <GradientMeter label="Completion" value={60} showValue />
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* Context Menu Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Context Menu
+          </h2>
+
+          <Card>
+            <CardHeader title="Right-Click Menu" description="Context menus triggered by right-click" />
+            <ContextMenu>
+              <ContextMenuTrigger>
+                <div className="p-8 border-2 border-dashed border-[var(--card-border)] rounded-xl text-center cursor-context-menu hover:border-[var(--primary)] transition-colors">
+                  <p className="text-[var(--muted)]">Right-click here to open context menu</p>
+                </div>
+              </ContextMenuTrigger>
+              <ContextMenuContent>
+                <ContextMenuLabel>Actions</ContextMenuLabel>
+                <ContextMenuItem icon={<Copy size={16} />}>Copy</ContextMenuItem>
+                <ContextMenuItem icon={<PencilSimple size={16} />}>Edit</ContextMenuItem>
+                <ContextMenuSeparator />
+                <ContextMenuCheckboxItem checked>Show Labels</ContextMenuCheckboxItem>
+                <ContextMenuCheckboxItem>Compact View</ContextMenuCheckboxItem>
+                <ContextMenuSeparator />
+                <ContextMenuItem icon={<Trash size={16} />} destructive>Delete</ContextMenuItem>
+              </ContextMenuContent>
+            </ContextMenu>
+          </Card>
+        </section>
+
+        {/* Toolbar Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Toolbar
+          </h2>
+
+          <Card>
+            <CardHeader title="Toolbar" description="Grouped actions bar" />
+            <div className="space-y-4">
+              <Toolbar>
+                <ToolbarGroup>
+                  <ToolbarButton>
+                    <PencilSimple size={16} />
+                  </ToolbarButton>
+                  <ToolbarButton>
+                    <Copy size={16} />
+                  </ToolbarButton>
+                  <ToolbarButton>
+                    <Trash size={16} />
+                  </ToolbarButton>
+                </ToolbarGroup>
+                <ToolbarSeparator />
+                <ToolbarGroup>
+                  <ToolbarButton active>
+                    <Code size={16} />
+                  </ToolbarButton>
+                  <ToolbarButton>
+                    <Image size={16} />
+                  </ToolbarButton>
+                </ToolbarGroup>
+                <ToolbarSeparator />
+                <ToolbarButton>
+                  <Gear size={16} />
+                </ToolbarButton>
+              </Toolbar>
+            </div>
+          </Card>
+        </section>
+
+        {/* Navigation Menu Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Navigation Menu
+          </h2>
+
+          <Card>
+            <CardHeader title="Navigation Menu" description="Dropdown navigation for headers" />
+            <NavigationMenu>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuGrid>
+                    <NavigationMenuCard
+                      href="#"
+                      title="Analytics"
+                      description="Track user behavior and performance"
+                    />
+                    <NavigationMenuCard
+                      href="#"
+                      title="Automation"
+                      description="Streamline your workflow"
+                    />
+                    <NavigationMenuCard
+                      href="#"
+                      title="Security"
+                      description="Protect your data"
+                    />
+                  </NavigationMenuGrid>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <div className="p-4 space-y-2">
+                    <NavigationMenuLink href="#">Documentation</NavigationMenuLink>
+                    <NavigationMenuLink href="#">Blog</NavigationMenuLink>
+                    <NavigationMenuLink href="#">Support</NavigationMenuLink>
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink href="#">Pricing</NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenu>
+          </Card>
         </section>
 
         {/* Color Palette */}
