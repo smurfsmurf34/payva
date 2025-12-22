@@ -20,15 +20,15 @@ export default function DashboardPage() {
     <DashboardLayout>
       <div className="space-y-8">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Welcome to Canary</h1>
+            <h1 className="text-2xl font-bold tracking-tight">Welcome to Canary Canary</h1>
             <p className="text-[var(--muted)] mt-1">
               Your premium UI template is ready. Start building something amazing.
             </p>
           </div>
-          <Link href="/playground">
-            <Button>
+          <Link href="/playground" className="shrink-0">
+            <Button className="w-full sm:w-auto">
               <Palette size={18} weight="duotone" />
               View Components
             </Button>

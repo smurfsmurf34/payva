@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -9,6 +9,8 @@ import {
   PanelLeftClose,
   PanelLeft,
   Palette,
+  Menu,
+  X,
 } from "lucide-react";
 import Image from "next/image";
 import { ThemeToggle } from "./ThemeToggle";
@@ -19,13 +21,19 @@ import {
   HoverMenuItem,
 } from "./ui/HoverMenu";
 
-// Context for sidebar collapsed state
+// Context for sidebar state
 const SidebarContext = createContext<{
   isCollapsed: boolean;
   setIsCollapsed: (value: boolean) => void;
+  isMobile: boolean;
+  isMobileOpen: boolean;
+  setIsMobileOpen: (value: boolean) => void;
 }>({
   isCollapsed: false,
   setIsCollapsed: () => {},
+  isMobile: false,
+  isMobileOpen: false,
+  setIsMobileOpen: () => {},
 });
 
 export const useSidebar = () => useContext(SidebarContext);
@@ -40,10 +48,18 @@ interface NavItemProps {
 function NavItem({ href, icon, label, isCollapsed }: NavItemProps) {
   const pathname = usePathname();
   const isActive = pathname === href;
+  const { isMobile, setIsMobileOpen } = useSidebar();
+
+  const handleClick = () => {
+    if (isMobile) {
+      setIsMobileOpen(false);
+    }
+  };
 
   return (
     <Link
       href={href}
+      onClick={handleClick}
       className={`
         flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200
         ${isCollapsed ? "justify-center" : ""}
@@ -67,30 +83,62 @@ function NavItem({ href, icon, label, isCollapsed }: NavItemProps) {
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        setIsMobileOpen(false);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
-    <SidebarContext.Provider value={{ isCollapsed, setIsCollapsed }}>
+    <SidebarContext.Provider
+      value={{ isCollapsed, setIsCollapsed, isMobile, isMobileOpen, setIsMobileOpen }}
+    >
       {children}
     </SidebarContext.Provider>
   );
 }
 
 export function Sidebar() {
-  const { isCollapsed, setIsCollapsed } = useSidebar();
+  const { isCollapsed, setIsCollapsed, isMobile, isMobileOpen, setIsMobileOpen } = useSidebar();
+
+  // On mobile, sidebar is hidden unless explicitly opened
+  // On desktop, sidebar is always visible (collapsed or expanded)
+  const isVisible = isMobile ? isMobileOpen : true;
 
   return (
-    <aside
-      className={`
-        fixed left-0 top-0 h-screen bg-[var(--sidebar-bg)] border-r border-[var(--sidebar-border)]
-        flex flex-col sidebar-transition z-50
-        ${isCollapsed ? "w-16" : "w-64"}
-      `}
-    >
+    <>
+      {/* Mobile backdrop */}
+      {isMobile && isMobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      )}
+
+      <aside
+        className={`
+          fixed left-0 top-0 h-screen bg-[var(--sidebar-bg)] border-r border-[var(--sidebar-border)]
+          flex flex-col sidebar-transition z-50
+          ${isMobile ? "w-64" : isCollapsed ? "w-16" : "w-64"}
+          ${isMobile && !isMobileOpen ? "-translate-x-full" : "translate-x-0"}
+        `}
+      >
       {/* Logo */}
       <div
         className="flex items-center justify-between h-16 px-4 border-b border-[var(--sidebar-border)]"
       >
-        {isCollapsed ? (
+        {!isMobile && isCollapsed ? (
           <HoverMenu>
             <HoverMenuTrigger className="!p-0 !border-0 !bg-transparent">
               <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center flex-shrink-0 p-1.5">
@@ -126,13 +174,23 @@ export function Sidebar() {
               </div>
               <span className="font-semibold text-lg tracking-tight">Canary Canary</span>
             </div>
-            <button
-              onClick={() => setIsCollapsed(true)}
-              className="p-1.5 rounded-md text-[var(--muted)] hover:bg-[var(--accent)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
-              title="Collapse sidebar"
-            >
-              <PanelLeftClose size={18} />
-            </button>
+            {isMobile ? (
+              <button
+                onClick={() => setIsMobileOpen(false)}
+                className="p-1.5 rounded-md text-[var(--muted)] hover:bg-[var(--accent)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
+                title="Close menu"
+              >
+                <X size={18} />
+              </button>
+            ) : (
+              <button
+                onClick={() => setIsCollapsed(true)}
+                className="p-1.5 rounded-md text-[var(--muted)] hover:bg-[var(--accent)] hover:text-[var(--foreground)] transition-colors cursor-pointer"
+                title="Collapse sidebar"
+              >
+                <PanelLeftClose size={18} />
+              </button>
+            )}
           </>
         )}
       </div>
@@ -143,14 +201,14 @@ export function Sidebar() {
           href="/"
           icon={<LayoutDashboard size={20} />}
           label="Dashboard"
-          isCollapsed={isCollapsed}
+          isCollapsed={!isMobile && isCollapsed}
         />
 
         <NavItem
           href="/playground"
           icon={<Palette size={20} />}
           label="Playground"
-          isCollapsed={isCollapsed}
+          isCollapsed={!isMobile && isCollapsed}
         />
 
         {/* Add your navigation items here */}
@@ -162,12 +220,13 @@ export function Sidebar() {
           href="/settings"
           icon={<Settings size={20} />}
           label="Settings"
-          isCollapsed={isCollapsed}
+          isCollapsed={!isMobile && isCollapsed}
         />
 
         {/* Theme toggle */}
-        <ThemeToggle isCollapsed={isCollapsed} />
+        <ThemeToggle isCollapsed={!isMobile && isCollapsed} />
       </div>
     </aside>
+    </>
   );
 }
