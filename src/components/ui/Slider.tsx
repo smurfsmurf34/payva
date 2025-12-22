@@ -29,11 +29,13 @@ export function Slider({
   const [internalValue, setInternalValue] = React.useState(defaultValue);
   const currentValue = value ?? internalValue;
 
-  const handleChange = (newValue: number[]) => {
-    const val = newValue[0];
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = Number(e.target.value);
     setInternalValue(val);
     onValueChange?.(val);
   };
+
+  const percentage = ((currentValue - min) / (max - min)) * 100;
 
   return (
     <div className="space-y-2">
@@ -51,32 +53,24 @@ export function Slider({
           )}
         </div>
       )}
-      <BaseSlider.Root
-        value={[currentValue]}
-        onValueChange={handleChange}
-        min={min}
-        max={max}
-        step={step}
-        disabled={disabled}
-        className={`
-          relative flex items-center w-full h-5 touch-none select-none
-          ${disabled ? "opacity-50 cursor-not-allowed" : ""}
-        `}
-      >
-        <BaseSlider.Control className="flex items-center w-full">
-          <BaseSlider.Track className="relative h-2 w-full rounded-full bg-[var(--accent)]">
-            <BaseSlider.Indicator className="absolute h-full rounded-full bg-[var(--primary)]" />
-            <BaseSlider.Thumb
-              className={`
-                block w-5 h-5 rounded-full bg-white border-2 border-[var(--primary)]
-                shadow-md transition-transform
-                hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2
-                ${disabled ? "" : "cursor-grab active:cursor-grabbing"}
-              `}
-            />
-          </BaseSlider.Track>
-        </BaseSlider.Control>
-      </BaseSlider.Root>
+      <div className={`relative flex items-center w-full h-5 ${disabled ? "opacity-50" : ""}`}>
+        <div className="relative h-2 w-full rounded-full bg-[var(--accent)]">
+          <div
+            className="absolute h-full rounded-full bg-[var(--primary)]"
+            style={{ width: `${percentage}%` }}
+          />
+        </div>
+        <input
+          type="range"
+          min={min}
+          max={max}
+          step={step}
+          value={currentValue}
+          onChange={handleChange}
+          disabled={disabled}
+          className="absolute w-full h-5 appearance-none bg-transparent cursor-pointer [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[var(--primary)] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:cursor-grab [&::-webkit-slider-thumb]:active:cursor-grabbing [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[var(--primary)] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-grab"
+        />
+      </div>
     </div>
   );
 }

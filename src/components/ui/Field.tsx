@@ -79,10 +79,8 @@ export function FieldControl({ children, className = "" }: { children: React.Rea
         text-[var(--foreground)] text-sm
         placeholder:text-[var(--muted)]
         transition-all duration-150
-        focus:outline-none focus:ring-2 focus:ring-[var(--primary)]
-        focus:ring-offset-2 focus:ring-offset-[var(--background)]
+        focus:outline-none focus:border-[var(--foreground-secondary)]
         data-[invalid]:border-[var(--danger)]
-        data-[invalid]:focus:ring-[var(--danger)]
         disabled:opacity-50 disabled:cursor-not-allowed
         ${className}
       `}

@@ -4,33 +4,48 @@ import React from "react";
 import { NavigationMenu as BaseNavigationMenu } from "@base-ui/react/navigation-menu";
 import { ChevronDown } from "lucide-react";
 
+// Context to allow links to close the menu
+const NavigationMenuContext = React.createContext<{
+  closeMenu: () => void;
+}>({ closeMenu: () => {} });
+
 interface NavigationMenuProps {
   children: React.ReactNode;
   className?: string;
 }
 
 export function NavigationMenu({ children, className = "" }: NavigationMenuProps) {
+  const [value, setValue] = React.useState<string | null>(null);
+
+  const closeMenu = React.useCallback(() => {
+    setValue(null);
+  }, []);
+
   return (
-    <BaseNavigationMenu.Root
-      className={`
-        relative
-        ${className}
-      `}
-    >
-      <BaseNavigationMenu.List
-        className="flex items-center gap-1"
+    <NavigationMenuContext.Provider value={{ closeMenu }}>
+      <BaseNavigationMenu.Root
+        value={value}
+        onValueChange={setValue}
+        className={`
+          relative
+          ${className}
+        `}
       >
-        {children}
-      </BaseNavigationMenu.List>
-      <BaseNavigationMenu.Viewport
-        className="
-          absolute left-0 top-full mt-2
-          w-full
-          data-[state=open]:animate-fade-in-down
-          data-[state=closed]:animate-fade-out
-        "
-      />
-    </BaseNavigationMenu.Root>
+        <BaseNavigationMenu.List
+          className="flex items-center gap-1"
+        >
+          {children}
+        </BaseNavigationMenu.List>
+        <BaseNavigationMenu.Viewport
+          className="
+            absolute left-0 top-full mt-2
+            w-full
+            data-[state=open]:animate-fade-in-down
+            data-[state=closed]:animate-fade-out
+          "
+        />
+      </BaseNavigationMenu.Root>
+    </NavigationMenuContext.Provider>
   );
 }
 
@@ -105,10 +120,13 @@ interface NavigationMenuLinkProps {
 }
 
 export function NavigationMenuLink({ href, children, active, className = "" }: NavigationMenuLinkProps) {
+  const { closeMenu } = React.useContext(NavigationMenuContext);
+
   return (
     <BaseNavigationMenu.Link
       href={href}
       active={active}
+      onMouseEnter={closeMenu}
       className={`
         inline-flex items-center px-4 py-2 rounded-lg
         text-sm font-medium
@@ -142,7 +160,7 @@ export function NavigationMenuGrid({ children, columns = 2, className = "" }: Na
   };
 
   return (
-    <div className={`grid ${gridCols[columns]} gap-2 ${className}`}>
+    <div className={`grid ${gridCols[columns]} gap-1 ${className}`}>
       {children}
     </div>
   );

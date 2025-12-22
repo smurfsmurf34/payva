@@ -170,10 +170,11 @@ export function IconButton({
 
 // Textured button - premium tactile style, use sparingly
 interface TexturedButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "dark" | "primary" | "light";
+  variant?: "dark" | "primary" | "light" | "accent";
   size?: "sm" | "md" | "lg";
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
+  animated?: boolean;
   children: React.ReactNode;
 }
 
@@ -182,6 +183,7 @@ export function TexturedButton({
   size = "md",
   icon,
   iconPosition = "left",
+  animated = false,
   className = "",
   children,
   ...props
@@ -200,6 +202,7 @@ export function TexturedButton({
       shadow: "shadow-[0_1px_2px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.06)]",
       hoverOverlay: "bg-gradient-to-b from-white/[0.08] to-transparent",
       activeOverlay: "bg-gradient-to-b from-black/[0.08] to-transparent",
+      glowColor: "",
     },
     primary: {
       base: "bg-[var(--primary)] text-white border-[var(--primary-active)]",
@@ -208,6 +211,7 @@ export function TexturedButton({
       shadow: "shadow-[0_1px_2px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.1)]",
       hoverOverlay: "bg-gradient-to-b from-white/[0.1] to-transparent",
       activeOverlay: "bg-gradient-to-b from-black/[0.1] to-transparent",
+      glowColor: "hover:shadow-[0_1px_2px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.1),0_0_20px_rgba(99,102,241,0.3)]",
     },
     light: {
       base: "bg-[#F5F5F5] text-[#1A1A1A] border-[#E0E0E0]",
@@ -216,6 +220,16 @@ export function TexturedButton({
       shadow: "shadow-[0_1px_2px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.8)]",
       hoverOverlay: "bg-gradient-to-b from-black/[0.02] to-transparent",
       activeOverlay: "bg-gradient-to-b from-black/[0.04] to-transparent",
+      glowColor: "",
+    },
+    accent: {
+      base: "bg-gradient-to-b from-[var(--primary)] to-[var(--primary-active)] text-white border-[var(--primary-active)]",
+      hover: "hover:from-[var(--primary-hover)] hover:to-[var(--primary)]",
+      active: "active:from-[var(--primary-active)] active:to-[var(--primary-active)]",
+      shadow: "shadow-[0_2px_4px_rgba(99,102,241,0.25),inset_0_1px_0_rgba(255,255,255,0.15)]",
+      hoverOverlay: "bg-gradient-to-b from-white/[0.12] to-transparent",
+      activeOverlay: "bg-gradient-to-b from-black/[0.08] to-transparent",
+      glowColor: "hover:shadow-[0_2px_4px_rgba(99,102,241,0.25),inset_0_1px_0_rgba(255,255,255,0.15),0_0_24px_rgba(99,102,241,0.4)]",
     },
   };
 
@@ -226,11 +240,12 @@ export function TexturedButton({
       className={`
         group relative overflow-hidden
         inline-flex items-center justify-center font-medium rounded-lg
-        border transition-all duration-100 ease-out
+        border transition-all duration-200 ease-out
         cursor-pointer select-none
         disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-none
         focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--primary)]
         ${v.base} ${v.hover} ${v.active} ${v.shadow}
+        ${animated ? v.glowColor : ""}
         ${sizes[size]}
         ${className}
       `}
@@ -254,6 +269,17 @@ export function TexturedButton({
           ${v.activeOverlay}
         `}
       />
+      {/* Shimmer effect for animated */}
+      {animated && (
+        <span
+          className="
+            absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent
+            translate-x-[-100%] group-hover:translate-x-[100%]
+            transition-transform duration-700
+            pointer-events-none
+          "
+        />
+      )}
       {/* Content */}
       <span className="relative z-10 inline-flex items-center gap-2 truncate">
         {iconPosition === "left" && icon}

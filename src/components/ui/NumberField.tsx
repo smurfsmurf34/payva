@@ -59,8 +59,7 @@ export function NumberField({
           transition-all duration-150
           ${error ? "border-[var(--danger)]" : "border-[var(--input-border)]"}
           ${disabled ? "opacity-50 cursor-not-allowed" : ""}
-          focus-within:ring-2 focus-within:ring-[var(--primary)] focus-within:ring-offset-2
-          focus-within:ring-offset-[var(--background)]
+          focus-within:border-[var(--foreground-secondary)]
         `}
       >
         <BaseNumberField.Decrement
@@ -169,7 +168,8 @@ export function CompactNumberField({
             bg-transparent text-[var(--foreground)]
             text-center text-sm font-medium
             outline-none rounded-md
-            focus:ring-2 focus:ring-[var(--primary)]
+            border border-transparent
+            focus:border-[var(--foreground-secondary)]
             [appearance:textfield]
             [&::-webkit-outer-spin-button]:appearance-none
             [&::-webkit-inner-spin-button]:appearance-none

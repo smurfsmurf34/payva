@@ -56,7 +56,7 @@ export function PopoverContent({
 }: PopoverContentProps) {
   return (
     <BasePopover.Portal>
-      <BasePopover.Positioner side={side} align={align} sideOffset={sideOffset}>
+      <BasePopover.Positioner side={side} align={align} sideOffset={sideOffset} className="z-50">
         <BasePopover.Popup
           className={`
             min-w-[220px] p-4

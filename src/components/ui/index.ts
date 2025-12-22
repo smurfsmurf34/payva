@@ -22,6 +22,7 @@ export { ScrollArea } from "./ScrollArea";
 // Forms
 export { Button, AnimatedButton, IconButton, TexturedButton } from "./Button";
 export { Input, Textarea, Select } from "./Input";
+export { Autocomplete, GroupedAutocomplete } from "./Autocomplete";
 export { Checkbox, CheckboxGroup } from "./Checkbox";
 export { Switch } from "./Switch";
 export { Slider, RangeSlider } from "./Slider";
@@ -37,6 +38,7 @@ export {
   Fieldset,
   FieldsetLegend,
 } from "./Field";
+export { Form } from "./Form";
 
 // Data Display
 export { Badge } from "./Badge";
@@ -116,6 +118,20 @@ export {
   NavigationMenuGrid,
   NavigationMenuCard,
 } from "./NavigationMenu";
+export {
+  Menubar,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
+  MenubarItem,
+  MenubarSeparator,
+  MenubarLabel,
+  MenubarCheckboxItem,
+  MenubarSubmenu,
+  MenubarSubmenuTrigger,
+  MenubarSubmenuContent,
+  MenubarGroup,
+} from "./Menubar";
 export {
   Toolbar,
   ToolbarButton,

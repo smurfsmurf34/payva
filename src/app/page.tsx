@@ -2,7 +2,7 @@
 
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { Card, CardHeader, StatCard, GradientCard, MetricCard } from "@/components/ui";
-import { Button } from "@/components/ui";
+import { Button, TexturedButton } from "@/components/ui";
 import {
   Sparkle,
   Palette,
@@ -28,10 +28,9 @@ export default function DashboardPage() {
             </p>
           </div>
           <Link href="/playground" className="shrink-0">
-            <Button className="w-full sm:w-auto">
-              <Palette size={18} weight="duotone" />
+            <TexturedButton variant="accent" size="lg" animated icon={<Palette size={18} weight="duotone" />}>
               View Components
-            </Button>
+            </TexturedButton>
           </Link>
         </div>
 

@@ -33,7 +33,8 @@ export function Avatar({
       className={`
         relative inline-flex items-center justify-center
         rounded-full overflow-hidden
-        bg-[var(--accent)] text-[var(--foreground)]
+        bg-[var(--background)] text-[var(--foreground-secondary)]
+        border-2 border-[var(--accent)]
         font-medium select-none
         ${sizeClasses[size]}
         ${className}
@@ -45,7 +46,7 @@ export function Avatar({
         className="w-full h-full object-cover"
       />
       <BaseAvatar.Fallback
-        className="flex items-center justify-center w-full h-full bg-[var(--primary)] text-white"
+        className="flex items-center justify-center w-full h-full bg-[var(--background)] text-[var(--foreground-secondary)]"
       >
         {initials}
       </BaseAvatar.Fallback>
@@ -69,7 +70,7 @@ export function AvatarGroup({ children, max = 4, size = "md" }: AvatarGroupProps
       {visibleChildren.map((child, index) => (
         <div
           key={index}
-          className="ring-2 ring-[var(--background)] rounded-full"
+          className="rounded-full"
         >
           {React.isValidElement(child)
             ? React.cloneElement(child as React.ReactElement<AvatarProps>, { size })
@@ -79,9 +80,10 @@ export function AvatarGroup({ children, max = 4, size = "md" }: AvatarGroupProps
       {remainingCount > 0 && (
         <div
           className={`
-            ring-2 ring-[var(--background)] rounded-full
+            rounded-full
             flex items-center justify-center
-            bg-[var(--muted)] text-[var(--foreground)]
+            bg-[var(--background)] text-[var(--foreground-secondary)]
+            border-2 border-[var(--accent)]
             font-medium
             ${sizeClasses[size]}
           `}

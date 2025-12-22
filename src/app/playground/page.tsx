@@ -113,6 +113,25 @@ import {
   NavigationMenuLink,
   NavigationMenuGrid,
   NavigationMenuCard,
+  Autocomplete,
+  GroupedAutocomplete,
+  Menubar,
+  MenubarMenu,
+  MenubarTrigger,
+  MenubarContent,
+  MenubarItem,
+  MenubarSeparator,
+  MenubarLabel,
+  MenubarCheckboxItem,
+  MenubarSubmenu,
+  MenubarSubmenuTrigger,
+  MenubarSubmenuContent,
+  Form,
+  PreviewCard,
+  PreviewCardTrigger,
+  PreviewCardContent,
+  UserPreviewCard,
+  LinkPreviewCard,
 } from "@/components/ui";
 import {
   Package,
@@ -640,6 +659,67 @@ export default function PlaygroundPage() {
                   ]}
                 />
               </div>
+            </Card>
+          </div>
+        </section>
+
+        {/* Autocomplete Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Autocomplete
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="Basic Autocomplete" description="Searchable dropdown with filtering" />
+              <Autocomplete
+                label="Select a framework"
+                placeholder="Search frameworks..."
+                options={[
+                  { value: "react", label: "React" },
+                  { value: "vue", label: "Vue" },
+                  { value: "angular", label: "Angular" },
+                  { value: "svelte", label: "Svelte" },
+                  { value: "next", label: "Next.js" },
+                  { value: "nuxt", label: "Nuxt" },
+                  { value: "remix", label: "Remix" },
+                  { value: "astro", label: "Astro" },
+                ]}
+              />
+            </Card>
+
+            <Card>
+              <CardHeader title="Grouped Autocomplete" description="Options organized by category" />
+              <GroupedAutocomplete
+                label="Select a city"
+                placeholder="Search cities..."
+                groups={[
+                  {
+                    label: "United States",
+                    items: [
+                      { value: "nyc", label: "New York" },
+                      { value: "la", label: "Los Angeles" },
+                      { value: "chicago", label: "Chicago" },
+                    ],
+                  },
+                  {
+                    label: "Europe",
+                    items: [
+                      { value: "london", label: "London" },
+                      { value: "paris", label: "Paris" },
+                      { value: "berlin", label: "Berlin" },
+                    ],
+                  },
+                  {
+                    label: "Asia",
+                    items: [
+                      { value: "tokyo", label: "Tokyo" },
+                      { value: "singapore", label: "Singapore" },
+                      { value: "seoul", label: "Seoul" },
+                    ],
+                  },
+                ]}
+              />
             </Card>
           </div>
         </section>
@@ -1258,7 +1338,7 @@ export default function PlaygroundPage() {
                   <FieldDescription>We will never share your email.</FieldDescription>
                   <input
                     type="email"
-                    className="w-full px-3 py-2 bg-[var(--accent)] border border-[var(--card-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                    className="w-full px-3 py-2 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg focus:outline-none focus:border-[var(--foreground-secondary)] transition-colors"
                     placeholder="you@example.com"
                   />
                 </Field>
@@ -1266,7 +1346,7 @@ export default function PlaygroundPage() {
                   <FieldLabel>Password</FieldLabel>
                   <input
                     type="password"
-                    className="w-full px-3 py-2 bg-[var(--accent)] border border-[var(--danger)] rounded-lg"
+                    className="w-full px-3 py-2 bg-[var(--input-bg)] border border-[var(--danger)] rounded-lg focus:outline-none"
                     placeholder="••••••••"
                   />
                   <FieldError>Password must be at least 8 characters.</FieldError>
@@ -1283,18 +1363,139 @@ export default function PlaygroundPage() {
                     <FieldLabel>First Name</FieldLabel>
                     <input
                       type="text"
-                      className="w-full px-3 py-2 bg-[var(--accent)] border border-[var(--card-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                      className="w-full px-3 py-2 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg focus:outline-none focus:border-[var(--foreground-secondary)] transition-colors"
                     />
                   </Field>
                   <Field>
                     <FieldLabel>Last Name</FieldLabel>
                     <input
                       type="text"
-                      className="w-full px-3 py-2 bg-[var(--accent)] border border-[var(--card-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                      className="w-full px-3 py-2 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg focus:outline-none focus:border-[var(--foreground-secondary)] transition-colors"
                     />
                   </Field>
                 </div>
               </Fieldset>
+            </Card>
+          </div>
+        </section>
+
+        {/* Form Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Form
+          </h2>
+
+          <Card>
+            <CardHeader title="Form with Validation" description="Native form with consolidated error handling" />
+            <Form
+              onFormSubmit={(values) => {
+                addToast({ type: "success", title: "Form submitted!", description: JSON.stringify(values) });
+              }}
+              className="max-w-md"
+            >
+              <Field>
+                <FieldLabel required>Email</FieldLabel>
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  className="w-full px-3 py-2 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg focus:outline-none focus:border-[var(--foreground-secondary)] transition-colors"
+                  placeholder="you@example.com"
+                />
+                <FieldError match="typeMismatch">Please enter a valid email address</FieldError>
+                <FieldError match="valueMissing">Email is required</FieldError>
+              </Field>
+
+              <Field>
+                <FieldLabel required>Password</FieldLabel>
+                <input
+                  name="password"
+                  type="password"
+                  required
+                  minLength={8}
+                  className="w-full px-3 py-2 bg-[var(--input-bg)] border border-[var(--input-border)] rounded-lg focus:outline-none focus:border-[var(--foreground-secondary)] transition-colors"
+                  placeholder="••••••••"
+                />
+                <FieldDescription>Must be at least 8 characters</FieldDescription>
+                <FieldError match="valueMissing">Password is required</FieldError>
+                <FieldError match="tooShort">Password must be at least 8 characters</FieldError>
+              </Field>
+
+              <Button type="submit" className="w-full">
+                Submit Form
+              </Button>
+            </Form>
+          </Card>
+        </section>
+
+        {/* PreviewCard Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Preview Card
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader title="User Preview Card" description="Hover over a username to see profile preview" />
+              <div className="space-y-4">
+                <p className="text-[var(--muted)]">
+                  Check out the work by{" "}
+                  <UserPreviewCard
+                    trigger="@johndoe"
+                    name="John Doe"
+                    username="johndoe"
+                    avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=John"
+                    bio="Full-stack developer passionate about building great user experiences."
+                    stats={[
+                      { label: "Followers", value: "1.2K" },
+                      { label: "Following", value: 847 },
+                      { label: "Posts", value: 234 },
+                    ]}
+                  />{" "}
+                  on our platform.
+                </p>
+                <p className="text-[var(--muted)]">
+                  Also recommended:{" "}
+                  <UserPreviewCard
+                    trigger="@janesmith"
+                    name="Jane Smith"
+                    username="janesmith"
+                    avatar="https://api.dicebear.com/7.x/avataaars/svg?seed=Jane"
+                    bio="Product designer and UX enthusiast. Creating beautiful interfaces."
+                    stats={[
+                      { label: "Followers", value: "3.4K" },
+                      { label: "Following", value: 521 },
+                    ]}
+                  />
+                </p>
+              </div>
+            </Card>
+
+            <Card>
+              <CardHeader title="Link Preview Card" description="Hover over links to see a preview" />
+              <div className="space-y-4">
+                <p className="text-[var(--muted)]">
+                  Read more about this on{" "}
+                  <LinkPreviewCard
+                    href="https://github.com"
+                    title="GitHub"
+                    description="GitHub is where over 100 million developers shape the future of software."
+                    image="https://github.githubassets.com/assets/github-logo-55c5b9a1fe52.png"
+                  >
+                    GitHub
+                  </LinkPreviewCard>
+                </p>
+                <p className="text-[var(--muted)]">
+                  Check out the documentation at{" "}
+                  <LinkPreviewCard
+                    href="https://base-ui.com"
+                    title="Base UI"
+                    description="Unstyled React components for building accessible, high-quality design systems."
+                  >
+                    Base UI
+                  </LinkPreviewCard>
+                </p>
+              </div>
             </Card>
           </div>
         </section>
@@ -1392,6 +1593,71 @@ export default function PlaygroundPage() {
           </Card>
         </section>
 
+        {/* Menubar Section */}
+        <section className="space-y-6">
+          <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
+            Menubar
+          </h2>
+
+          <Card>
+            <CardHeader title="Application Menubar" description="Traditional menu bar with dropdowns" />
+            <Menubar>
+              <MenubarMenu>
+                <MenubarTrigger>File</MenubarTrigger>
+                <MenubarContent>
+                  <MenubarItem shortcut="⌘N">New File</MenubarItem>
+                  <MenubarItem shortcut="⌘O">Open</MenubarItem>
+                  <MenubarSeparator />
+                  <MenubarItem shortcut="⌘S">Save</MenubarItem>
+                  <MenubarItem shortcut="⇧⌘S">Save As...</MenubarItem>
+                  <MenubarSeparator />
+                  <MenubarItem shortcut="⌘Q" destructive>Quit</MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+
+              <MenubarMenu>
+                <MenubarTrigger>Edit</MenubarTrigger>
+                <MenubarContent>
+                  <MenubarItem shortcut="⌘Z">Undo</MenubarItem>
+                  <MenubarItem shortcut="⇧⌘Z">Redo</MenubarItem>
+                  <MenubarSeparator />
+                  <MenubarItem shortcut="⌘X">Cut</MenubarItem>
+                  <MenubarItem shortcut="⌘C">Copy</MenubarItem>
+                  <MenubarItem shortcut="⌘V">Paste</MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+
+              <MenubarMenu>
+                <MenubarTrigger>View</MenubarTrigger>
+                <MenubarContent>
+                  <MenubarCheckboxItem checked>Show Toolbar</MenubarCheckboxItem>
+                  <MenubarCheckboxItem>Show Sidebar</MenubarCheckboxItem>
+                  <MenubarCheckboxItem checked>Show Status Bar</MenubarCheckboxItem>
+                  <MenubarSeparator />
+                  <MenubarSubmenu>
+                    <MenubarSubmenuTrigger>Zoom</MenubarSubmenuTrigger>
+                    <MenubarSubmenuContent>
+                      <MenubarItem>Zoom In</MenubarItem>
+                      <MenubarItem>Zoom Out</MenubarItem>
+                      <MenubarItem>Reset Zoom</MenubarItem>
+                    </MenubarSubmenuContent>
+                  </MenubarSubmenu>
+                </MenubarContent>
+              </MenubarMenu>
+
+              <MenubarMenu>
+                <MenubarTrigger>Help</MenubarTrigger>
+                <MenubarContent>
+                  <MenubarItem>Documentation</MenubarItem>
+                  <MenubarItem>Release Notes</MenubarItem>
+                  <MenubarSeparator />
+                  <MenubarItem>About</MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+            </Menubar>
+          </Card>
+        </section>
+
         {/* Navigation Menu Section */}
         <section className="space-y-6">
           <h2 className="text-xl font-semibold border-b border-[var(--card-border)] pb-2 tracking-tight">
@@ -1447,7 +1713,7 @@ export default function PlaygroundPage() {
           </h2>
 
           <Card>
-            <CardHeader title="Theme Colors" description="Custom palette: #E84855, #F3D104, #06D6A0, #0077B6, #023047" />
+            <CardHeader title="Theme Colors" description="Click any color to copy its hex code to clipboard" />
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {[
                 { name: "Danger", var: "var(--danger)", hex: "#E84855" },
@@ -1455,13 +1721,23 @@ export default function PlaygroundPage() {
                 { name: "Success", var: "var(--success)", hex: "#06D6A0" },
                 { name: "Info", var: "var(--info)", hex: "#0077B6" },
                 { name: "Navy", var: "var(--navy)", hex: "#023047" },
-                { name: "Primary", var: "var(--primary)", hex: "" },
+                { name: "Primary", var: "var(--primary)", hex: "#6366F1" },
               ].map((color) => (
-                <div key={color.name} className="text-center">
-                  <div className="w-full h-16 rounded-xl mb-2 shadow-sm" style={{ backgroundColor: color.var }} />
+                <button
+                  key={color.name}
+                  className="text-center group cursor-pointer"
+                  onClick={() => {
+                    navigator.clipboard.writeText(color.hex);
+                    addToast({ type: "success", title: "Copied!", description: `${color.hex} copied to clipboard` });
+                  }}
+                >
+                  <div
+                    className="w-full h-16 rounded-xl mb-2 shadow-sm transition-transform group-hover:scale-105 group-active:scale-95"
+                    style={{ backgroundColor: color.var }}
+                  />
                   <p className="text-xs font-medium">{color.name}</p>
-                  {color.hex && <p className="text-xs font-mono text-[var(--muted)]">{color.hex}</p>}
-                </div>
+                  <p className="text-xs font-mono text-[var(--muted)]">{color.hex}</p>
+                </button>
               ))}
             </div>
           </Card>
