@@ -1,122 +1,80 @@
 "use client";
 
 import { useTheme } from "./ThemeProvider";
-import { Sun, Moon, Monitor } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
 
 interface ThemeToggleProps {
   isCollapsed?: boolean;
 }
 
 export function ThemeToggle({ isCollapsed = false }: ThemeToggleProps) {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
-  const cycleTheme = () => {
-    const themes: Array<"light" | "dark" | "system"> = ["light", "dark", "system"];
-    const currentIndex = themes.indexOf(theme);
-    const nextIndex = (currentIndex + 1) % themes.length;
-    setTheme(themes[nextIndex]);
+  const toggleTheme = () => {
+    // Toggle between light and dark based on current resolved theme
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
-  const getIcon = () => {
-    if (theme === "system") {
-      return <Monitor size={20} />;
-    }
-    return resolvedTheme === "dark" ? <Moon size={20} /> : <Sun size={20} />;
-  };
-
-  const getLabel = () => {
-    switch (theme) {
-      case "light":
-        return "Light";
-      case "dark":
-        return "Dark";
-      case "system":
-        return "System";
-    }
-  };
+  const icon = resolvedTheme === "dark" ? <Moon size={20} /> : <Sun size={20} />;
+  const label = resolvedTheme === "dark" ? "Dark" : "Light";
 
   return (
     <button
-      onClick={cycleTheme}
+      onClick={toggleTheme}
       className={`
         flex items-center w-full px-3 py-2.5 rounded-lg
         text-[var(--muted)] hover:bg-[var(--accent)] hover:text-[var(--foreground)]
         transition-colors cursor-pointer
         ${isCollapsed ? "justify-center" : "gap-3"}
       `}
-      title={`Theme: ${getLabel()} (click to change)`}
+      title={`Theme: ${label} (click to toggle)`}
     >
-      {getIcon()}
+      {icon}
       {!isCollapsed && (
-        <span className="font-medium text-sm">{getLabel()}</span>
+        <span className="font-medium text-sm">{label}</span>
       )}
     </button>
   );
 }
 
-// Dropdown version for more control
-export function ThemeDropdown({ isCollapsed = false }: ThemeToggleProps) {
-  const { theme, setTheme, resolvedTheme } = useTheme();
-
-  if (isCollapsed) {
-    return <ThemeToggle isCollapsed />;
-  }
+// Simple two-button version for settings or other UIs
+export function ThemeSwitch() {
+  const { setTheme, resolvedTheme } = useTheme();
 
   return (
-    <div className="px-2">
-      <p className="px-3 py-1 text-xs font-medium text-[var(--muted)] uppercase tracking-wider">
-        Theme
-      </p>
-      <div className="flex gap-1 p-1 bg-[var(--accent)] rounded-lg">
-        <button
-          onClick={() => setTheme("light")}
-          className={`
-            flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-md text-sm font-medium
-            transition-colors cursor-pointer
-            ${
-              theme === "light"
-                ? "bg-[var(--card-bg)] text-[var(--foreground)] shadow-sm"
-                : "text-[var(--muted)] hover:text-[var(--foreground)]"
-            }
-          `}
-          title="Light theme"
-        >
-          <Sun size={14} />
-          <span className="hidden sm:inline">Light</span>
-        </button>
-        <button
-          onClick={() => setTheme("dark")}
-          className={`
-            flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-md text-sm font-medium
-            transition-colors cursor-pointer
-            ${
-              theme === "dark"
-                ? "bg-[var(--card-bg)] text-[var(--foreground)] shadow-sm"
-                : "text-[var(--muted)] hover:text-[var(--foreground)]"
-            }
-          `}
-          title="Dark theme"
-        >
-          <Moon size={14} />
-          <span className="hidden sm:inline">Dark</span>
-        </button>
-        <button
-          onClick={() => setTheme("system")}
-          className={`
-            flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-md text-sm font-medium
-            transition-colors cursor-pointer
-            ${
-              theme === "system"
-                ? "bg-[var(--card-bg)] text-[var(--foreground)] shadow-sm"
-                : "text-[var(--muted)] hover:text-[var(--foreground)]"
-            }
-          `}
-          title="System theme"
-        >
-          <Monitor size={14} />
-          <span className="hidden sm:inline">Auto</span>
-        </button>
-      </div>
+    <div className="flex gap-1 p-1 bg-[var(--accent)] rounded-lg">
+      <button
+        onClick={() => setTheme("light")}
+        className={`
+          flex-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-md text-sm font-medium
+          transition-colors cursor-pointer
+          ${
+            resolvedTheme === "light"
+              ? "bg-[var(--card-bg)] text-[var(--foreground)] shadow-sm"
+              : "text-[var(--muted)] hover:text-[var(--foreground)]"
+          }
+        `}
+        title="Light theme"
+      >
+        <Sun size={14} />
+        <span>Light</span>
+      </button>
+      <button
+        onClick={() => setTheme("dark")}
+        className={`
+          flex-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-md text-sm font-medium
+          transition-colors cursor-pointer
+          ${
+            resolvedTheme === "dark"
+              ? "bg-[var(--card-bg)] text-[var(--foreground)] shadow-sm"
+              : "text-[var(--muted)] hover:text-[var(--foreground)]"
+          }
+        `}
+        title="Dark theme"
+      >
+        <Moon size={14} />
+        <span>Dark</span>
+      </button>
     </div>
   );
 }
