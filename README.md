@@ -65,7 +65,7 @@ Edit `src/app/globals.css` to customize the color palette:
 
 ```css
 :root {
-  --primary: #6D28D9;        /* Your primary brand color */
+  --primary: #00A6FF;        /* Your primary brand color */
   --success: #06D6A0;        /* Teal */
   --warning: #F3D104;        /* Yellow */
   --danger: #E84855;         /* Red */
@@ -119,11 +119,76 @@ import {
 } from "@/components/ui";
 ```
 
+## Adding Base UI Components
+
+This template uses [Base UI](https://base-ui.com/) for unstyled, accessible primitives. Base UI provides the behavior and accessibility—we add the styling using our design system variables.
+
+### Pattern
+
+1. **Import the Base UI primitive** from `@base-ui/react`
+2. **Create a wrapper component** in `src/components/ui/`
+3. **Apply styling** using CSS variables from `globals.css`
+4. **Export from the barrel** in `src/components/ui/index.ts`
+
+### Example: Adding a Slider
+
+```tsx
+// src/components/ui/Slider.tsx
+"use client";
+
+import { Slider as BaseSlider } from "@base-ui/react/slider";
+
+interface SliderProps {
+  value?: number;
+  onChange?: (value: number) => void;
+  min?: number;
+  max?: number;
+}
+
+export function Slider({ value, onChange, min = 0, max = 100 }: SliderProps) {
+  return (
+    <BaseSlider.Root
+      value={value}
+      onValueChange={(val) => onChange?.(val)}
+      min={min}
+      max={max}
+      className="relative flex items-center w-full h-5"
+    >
+      <BaseSlider.Track className="h-1.5 w-full rounded-full bg-[var(--accent)]">
+        <BaseSlider.Indicator className="h-full rounded-full bg-[var(--primary)]" />
+        <BaseSlider.Thumb className="w-4 h-4 rounded-full bg-[var(--primary)] border-2 border-white shadow-md cursor-pointer" />
+      </BaseSlider.Track>
+    </BaseSlider.Root>
+  );
+}
+```
+
+Then add to `src/components/ui/index.ts`:
+```tsx
+export { Slider } from "./Slider";
+```
+
+### Available Base UI Primitives
+
+See [base-ui.com/react/components](https://base-ui.com/react/components) for all available components:
+- Accordion, Alert Dialog, Checkbox, Collapsible
+- Dialog, Field, Form, Menu, Number Field
+- Popover, Progress, Radio Group, Scroll Area
+- Select, Separator, Slider, Switch, Tabs
+- Toast, Toggle, Toggle Group, Tooltip
+
+### Styling Guidelines
+
+- Use CSS variables from `globals.css` (e.g., `var(--primary)`, `var(--accent)`)
+- Support both light and dark modes automatically via variables
+- Use Tailwind classes for layout and spacing
+- Add `"use client"` directive for interactive components
+
 ## Tech Stack
 
 - **Framework:** Next.js 16 (App Router)
 - **Styling:** Tailwind CSS 4
-- **UI Primitives:** Base UI (Radix-based)
+- **UI Primitives:** Base UI (unstyled, accessible components)
 - **Icons:** Phosphor Icons + Lucide
 - **Fonts:** Switzer (Fontshare) + JetBrains Mono (Google Fonts)
 
