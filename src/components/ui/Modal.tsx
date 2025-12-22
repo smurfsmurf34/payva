@@ -82,7 +82,7 @@ export function ModalHeader({ children, className = "" }: ModalHeaderProps) {
         ${className}
       `}
     >
-      <Dialog.Title className="text-lg font-mono font-semibold tracking-tight">{children}</Dialog.Title>
+      <Dialog.Title className="text-lg font-semibold tracking-tight">{children}</Dialog.Title>
       <Dialog.Close
         className="p-2 rounded-lg hover:bg-[var(--accent)] transition-colors cursor-pointer"
         aria-label="Close"

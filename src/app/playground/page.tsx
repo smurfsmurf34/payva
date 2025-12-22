@@ -1692,11 +1692,23 @@ export default function PlaygroundPage() {
               <NavigationMenuItem>
                 <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="p-4 space-y-2">
-                    <NavigationMenuLink href="#">Documentation</NavigationMenuLink>
-                    <NavigationMenuLink href="#">Blog</NavigationMenuLink>
-                    <NavigationMenuLink href="#">Support</NavigationMenuLink>
-                  </div>
+                  <NavigationMenuGrid>
+                    <NavigationMenuCard
+                      href="#"
+                      title="Documentation"
+                      description="Guides and API reference"
+                    />
+                    <NavigationMenuCard
+                      href="#"
+                      title="Blog"
+                      description="Latest news and updates"
+                    />
+                    <NavigationMenuCard
+                      href="#"
+                      title="Support"
+                      description="Get help from our team"
+                    />
+                  </NavigationMenuGrid>
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
