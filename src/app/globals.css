@@ -1,0 +1,962 @@
+@import "tailwindcss";
+
+/* ============================================
+   DESIGN SYSTEM - LUXE PREMIUM THEME
+   ============================================ */
+
+/* ============================================
+   SPACING SCALE (4px base unit)
+   ============================================ */
+:root {
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0-5: 0.125rem;  /* 2px */
+  --space-1: 0.25rem;     /* 4px */
+  --space-1-5: 0.375rem;  /* 6px */
+  --space-2: 0.5rem;      /* 8px */
+  --space-2-5: 0.625rem;  /* 10px */
+  --space-3: 0.75rem;     /* 12px */
+  --space-3-5: 0.875rem;  /* 14px */
+  --space-4: 1rem;        /* 16px */
+  --space-5: 1.25rem;     /* 20px */
+  --space-6: 1.5rem;      /* 24px */
+  --space-7: 1.75rem;     /* 28px */
+  --space-8: 2rem;        /* 32px */
+  --space-9: 2.25rem;     /* 36px */
+  --space-10: 2.5rem;     /* 40px */
+  --space-12: 3rem;       /* 48px */
+  --space-14: 3.5rem;     /* 56px */
+  --space-16: 4rem;       /* 64px */
+  --space-20: 5rem;       /* 80px */
+  --space-24: 6rem;       /* 96px */
+  --space-32: 8rem;       /* 128px */
+}
+
+/* ============================================
+   TYPOGRAPHY SCALE
+   ============================================ */
+:root {
+  /* Font Families - Refined pairing */
+  /* Switzer: Display, headlines, body text - refined neo-grotesque */
+  --font-sans: 'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Switzer', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* JetBrains Mono: Data, numbers, code, labels - technical precision */
+  --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Font Sizes - Refined scale */
+  --text-2xs: 0.625rem;   /* 10px */
+  --text-xs: 0.75rem;     /* 12px */
+  --text-sm: 0.8125rem;   /* 13px */
+  --text-base: 0.875rem;  /* 14px */
+  --text-md: 0.9375rem;   /* 15px */
+  --text-lg: 1rem;        /* 16px */
+  --text-xl: 1.125rem;    /* 18px */
+  --text-2xl: 1.25rem;    /* 20px */
+  --text-3xl: 1.5rem;     /* 24px */
+  --text-4xl: 1.875rem;   /* 30px */
+  --text-5xl: 2.25rem;    /* 36px */
+  --text-6xl: 3rem;       /* 48px */
+  --text-7xl: 3.75rem;    /* 60px */
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 1.8;
+
+  /* Letter Spacing */
+  --tracking-tightest: -0.04em;
+  --tracking-tighter: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.01em;
+  --tracking-wider: 0.02em;
+  --tracking-widest: 0.06em;
+  --tracking-ultra: 0.1em;
+
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+}
+
+/* ============================================
+   BORDER RADIUS SCALE
+   ============================================ */
+:root {
+  --radius-none: 0;
+  --radius-xs: 0.125rem;  /* 2px */
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.375rem;  /* 6px */
+  --radius-lg: 0.5rem;    /* 8px */
+  --radius-xl: 0.75rem;   /* 12px */
+  --radius-2xl: 1rem;     /* 16px */
+  --radius-3xl: 1.25rem;  /* 20px */
+  --radius-4xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px;
+}
+
+/* ============================================
+   TIMING & EASING
+   ============================================ */
+:root {
+  /* Durations */
+  --duration-50: 50ms;
+  --duration-75: 75ms;
+  --duration-100: 100ms;
+  --duration-150: 150ms;
+  --duration-200: 200ms;
+  --duration-300: 300ms;
+  --duration-400: 400ms;
+  --duration-500: 500ms;
+  --duration-700: 700ms;
+  --duration-1000: 1000ms;
+
+  /* Easing Functions */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Premium easings - smoother, more refined */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  --ease-bounce: cubic-bezier(0.68, -0.35, 0.265, 1.35);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-luxe: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Specific use-case easings */
+  --ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --ease-leave: cubic-bezier(0.4, 0, 1, 1);
+  --ease-emphasize: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* ============================================
+   SHADOWS - Premium depth system
+   ============================================ */
+:root {
+  /* Subtle, refined shadows */
+  --shadow-2xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.03);
+  --shadow-xl: 0 20px 40px -8px rgba(0, 0, 0, 0.1), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 32px 64px -12px rgba(0, 0, 0, 0.14), 0 12px 24px -4px rgba(0, 0, 0, 0.05);
+  --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+
+  /* Colored shadows for premium glow effects */
+  --shadow-glow-primary: 0 0 20px -4px var(--primary);
+  --shadow-glow-accent: 0 0 20px -4px var(--accent-gold);
+  --shadow-glow-success: 0 0 16px -4px var(--success);
+}
+
+/* ============================================
+   LIGHT MODE - LUXE PALETTE
+   Sophisticated warm neutrals with violet primary
+   ============================================ */
+:root {
+  /* Base - Warm off-whites */
+  --background: #FAFAF8;
+  --background-secondary: #FFFFFF;
+  --background-tertiary: #F5F5F3;
+
+  /* Foreground - Rich, warm darks */
+  --foreground: #1A1A1A;
+  --foreground-secondary: #2E2E2E;
+  --foreground-tertiary: #454545;
+
+  /* Sidebar - Subtle distinction */
+  --sidebar-bg: #FFFFFF;
+  --sidebar-border: #EBEBEB;
+  --sidebar-hover: #F7F7F5;
+
+  /* Primary - Deep violet (luxe, premium) */
+  --primary: #6D28D9;
+  --primary-hover: #5B21B6;
+  --primary-active: #4C1D95;
+  --primary-light: #EDE9FE;
+  --primary-lighter: #F5F3FF;
+
+  /* Accent - Gold/Yellow (premium touch) */
+  --accent-gold: #F3D104;
+  --accent-gold-hover: #D4B600;
+  --accent-gold-light: #FDF8CC;
+  --accent-gold-lighter: #FEFCE6;
+
+  /* Neutrals - Warm gray scale */
+  --muted: #71717A;
+  --muted-light: #A1A1AA;
+  --muted-lighter: #D4D4D8;
+
+  /* Surface - Cards and containers */
+  --accent: #F4F4F5;
+  --accent-hover: #E4E4E7;
+  --accent-active: #D4D4D8;
+
+  /* Semantic - Custom Palette */
+  /* Green/Teal: #06D6A0 */
+  --success: #06D6A0;
+  --success-hover: #05B888;
+  --success-light: #CCFAED;
+  --success-lighter: #E6FDF6;
+
+  /* Yellow: #F3D104 */
+  --warning: #F3D104;
+  --warning-hover: #D4B600;
+  --warning-light: #FDF8CC;
+  --warning-lighter: #FEFCE6;
+
+  /* Red: #E84855 */
+  --danger: #E84855;
+  --danger-hover: #D13A47;
+  --danger-light: #FCDADD;
+  --danger-lighter: #FEF0F1;
+
+  /* Blue: #0077B6 */
+  --info: #0077B6;
+  --info-hover: #00669E;
+  --info-light: #CCE4F0;
+  --info-lighter: #E6F2F8;
+
+  /* Navy: #023047 */
+  --navy: #023047;
+  --navy-light: #0A4D6E;
+  --navy-lighter: #CCD9E0;
+
+  /* Component tokens */
+  --card-bg: #FFFFFF;
+  --card-border: #E5E5E5;
+  --card-hover: #FAFAFA;
+
+  --input-bg: #FFFFFF;
+  --input-border: #D4D4D8;
+  --input-focus: var(--primary);
+
+  /* Overlay */
+  --overlay: rgba(0, 0, 0, 0.5);
+  --overlay-light: rgba(0, 0, 0, 0.1);
+
+  /* Special - Glass effect base */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   DARK MODE - LUXE PALETTE
+   Rich, deep tones with violet glow
+   ============================================ */
+[data-theme="dark"] {
+  /* Base - Deep, rich darks */
+  --background: #09090B;
+  --background-secondary: #0F0F12;
+  --background-tertiary: #18181B;
+
+  /* Foreground - Crisp whites */
+  --foreground: #FAFAFA;
+  --foreground-secondary: #E4E4E7;
+  --foreground-tertiary: #A1A1AA;
+
+  /* Sidebar - Elevated surface */
+  --sidebar-bg: #0F0F12;
+  --sidebar-border: #27272A;
+  --sidebar-hover: #1C1C1F;
+
+  /* Primary - Glowing violet */
+  --primary: #8B5CF6;
+  --primary-hover: #A78BFA;
+  --primary-active: #7C3AED;
+  --primary-light: #2E1065;
+  --primary-lighter: #1E1033;
+
+  /* Accent - Gold/Yellow */
+  --accent-gold: #F3D104;
+  --accent-gold-hover: #FFE033;
+  --accent-gold-light: #3D3500;
+  --accent-gold-lighter: #1F1B00;
+
+  /* Neutrals - Cool gray scale */
+  --muted: #71717A;
+  --muted-light: #52525B;
+  --muted-lighter: #3F3F46;
+
+  /* Surface */
+  --accent: #27272A;
+  --accent-hover: #3F3F46;
+  --accent-active: #52525B;
+
+  /* Semantic - Custom Palette (vibrant in dark) */
+  /* Green/Teal: #06D6A0 */
+  --success: #06D6A0;
+  --success-hover: #1EEDB5;
+  --success-light: #053D2E;
+  --success-lighter: #021F17;
+
+  /* Yellow: #F3D104 */
+  --warning: #F3D104;
+  --warning-hover: #FFE033;
+  --warning-light: #3D3500;
+  --warning-lighter: #1F1B00;
+
+  /* Red: #E84855 */
+  --danger: #E84855;
+  --danger-hover: #FF6B77;
+  --danger-light: #3D1216;
+  --danger-lighter: #1F090B;
+
+  /* Blue: #0077B6 */
+  --info: #0077B6;
+  --info-hover: #1A9AD9;
+  --info-light: #002A40;
+  --info-lighter: #001520;
+
+  /* Navy: #023047 */
+  --navy: #023047;
+  --navy-light: #0A4D6E;
+  --navy-lighter: #012030;
+
+  /* Component tokens */
+  --card-bg: #0F0F12;
+  --card-border: #27272A;
+  --card-hover: #18181B;
+
+  --input-bg: #18181B;
+  --input-border: #3F3F46;
+  --input-focus: var(--primary);
+
+  /* Overlay */
+  --overlay: rgba(0, 0, 0, 0.7);
+  --overlay-light: rgba(0, 0, 0, 0.4);
+
+  /* Glass effect */
+  --glass-bg: rgba(15, 15, 18, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.08);
+
+  /* Dark mode shadows */
+  --shadow-2xs: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 8px -2px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.5), 0 4px 8px -2px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 20px 40px -8px rgba(0, 0, 0, 0.6), 0 8px 16px -4px rgba(0, 0, 0, 0.4);
+  --shadow-2xl: 0 32px 64px -12px rgba(0, 0, 0, 0.7), 0 12px 24px -4px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   TAILWIND THEME INLINE
+   ============================================ */
+@theme inline {
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-foreground: var(--foreground);
+  --color-foreground-secondary: var(--foreground-secondary);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-light: var(--primary-light);
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-muted: var(--muted);
+  --color-muted-light: var(--muted-light);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-success: var(--success);
+  --color-success-light: var(--success-light);
+  --color-warning: var(--warning);
+  --color-warning-light: var(--warning-light);
+  --color-danger: var(--danger);
+  --color-danger-light: var(--danger-light);
+  --color-info: var(--info);
+  --color-info-light: var(--info-light);
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-input-bg: var(--input-bg);
+  --color-input-border: var(--input-border);
+  /* Switzer for body/display, JetBrains Mono for technical elements */
+  --font-sans: 'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+  margin: 0;
+  padding: 0;
+  transition: background-color var(--duration-200) var(--ease-out),
+              color var(--duration-200) var(--ease-out);
+}
+
+/* Font features for better typography */
+body {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+/* Apply slashed zero to all mono font usage for better legibility */
+/* Note: JetBrains Mono uses a SLASHED zero (diagonal line), not dotted */
+@layer utilities {
+  .font-mono {
+    font-feature-settings: "zero" 1 !important;
+  }
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITY CLASSES
+   ============================================ */
+
+/* Font family utilities */
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-tight);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-tight);
+  font-feature-settings: "zero" 1;
+}
+
+/* Display headings - Switzer for refined elegance */
+.heading-display {
+  font-family: var(--font-display);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-tight);
+}
+
+/* Mono text styling - for data and technical elements */
+.text-mono {
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-tight);
+  font-feature-settings: "tnum" 1, "zero" 1;
+}
+
+/* Headlines in mono - for technical/data headings only */
+.heading-mono {
+  font-family: var(--font-mono);
+  font-weight: var(--font-semibold);
+  letter-spacing: var(--tracking-tighter);
+  line-height: var(--leading-tight);
+  font-feature-settings: "zero" 1;
+}
+
+/* Labels - uppercase mono for technical labels */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--font-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+/* Data/numbers in mono - for values, prices, IDs */
+.data-mono {
+  font-family: var(--font-mono);
+  font-feature-settings: "tnum" 1, "zero" 1;
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Body text - Switzer for readability */
+.body-text {
+  font-family: var(--font-sans);
+  line-height: var(--leading-relaxed);
+}
+
+/* Tabular numbers for aligned data */
+.tabular-nums {
+  font-feature-settings: "tnum" 1;
+}
+
+/* Slashed zero for clarity */
+.slashed-zero {
+  font-feature-settings: "zero" 1;
+}
+
+/* ============================================
+   BASE-UI OVERRIDES
+   ============================================ */
+
+/* Kill ALL outlines and rings in menus */
+[class*="Menu"],
+[data-menu],
+[data-menu-popup],
+[data-menu-positioner],
+[data-menu-item],
+[data-menu-checkbox-item],
+[data-submenu-trigger],
+[data-highlighted] {
+  outline: 0 !important;
+  outline-width: 0 !important;
+  outline-style: none !important;
+  outline-color: transparent !important;
+  outline-offset: 0 !important;
+  box-shadow: none !important;
+  --tw-ring-width: 0 !important;
+  --tw-ring-color: transparent !important;
+  --tw-ring-offset-width: 0 !important;
+}
+
+[class*="Menu"] *,
+[data-menu] *,
+[data-menu-popup] * {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+[data-menu-item]:focus,
+[data-menu-item]:focus-visible,
+[data-menu-checkbox-item]:focus,
+[data-menu-checkbox-item]:focus-visible,
+[data-submenu-trigger]:focus,
+[data-submenu-trigger]:focus-visible,
+[data-highlighted]:focus,
+[data-highlighted]:focus-visible {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* ============================================
+   ANIMATION UTILITIES
+   ============================================ */
+
+/* Sidebar transitions */
+.sidebar-transition {
+  transition: width var(--duration-200) var(--ease-luxe);
+}
+
+.sidebar-content-transition {
+  transition: opacity var(--duration-150) var(--ease-out),
+              transform var(--duration-150) var(--ease-out);
+}
+
+/* Theme transition for smooth switching */
+.theme-transition,
+.theme-transition *,
+.theme-transition *::before,
+.theme-transition *::after {
+  transition: background-color var(--duration-200) var(--ease-out),
+              border-color var(--duration-200) var(--ease-out),
+              color var(--duration-200) var(--ease-out) !important;
+}
+
+/* Collapsible panel animation */
+[data-collapsible-panel] {
+  overflow: hidden;
+  transition: height var(--duration-200) var(--ease-out);
+}
+
+/* ============================================
+   MICRO-INTERACTION ANIMATIONS
+   ============================================ */
+
+/* Button press effect - refined */
+.btn-press {
+  transition: transform var(--duration-100) var(--ease-out),
+              box-shadow var(--duration-100) var(--ease-out);
+}
+
+.btn-press:active {
+  transform: scale(0.98);
+}
+
+/* Hover lift effect - premium */
+.hover-lift {
+  transition: transform var(--duration-200) var(--ease-luxe),
+              box-shadow var(--duration-200) var(--ease-luxe);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Subtle scale on hover */
+.hover-scale {
+  transition: transform var(--duration-200) var(--ease-out);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Focus ring animation - prominent */
+.focus-ring {
+  transition: box-shadow var(--duration-150) var(--ease-out),
+              outline var(--duration-150) var(--ease-out);
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Glow effect on focus/hover */
+.hover-glow:hover {
+  box-shadow: var(--shadow-glow-primary);
+}
+
+/* ============================================
+   KEYFRAME ANIMATIONS
+   ============================================ */
+
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn var(--duration-200) var(--ease-out);
+}
+
+/* Fade in up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--duration-300) var(--ease-luxe);
+}
+
+/* Fade in down */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown var(--duration-300) var(--ease-luxe);
+}
+
+/* Scale in */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--duration-200) var(--ease-spring);
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight var(--duration-300) var(--ease-luxe);
+}
+
+/* Slide out to right */
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.animate-slide-out-right {
+  animation: slideOutRight var(--duration-200) var(--ease-in);
+}
+
+/* Stagger animation helper */
+.stagger-1 { animation-delay: 30ms; }
+.stagger-2 { animation-delay: 60ms; }
+.stagger-3 { animation-delay: 90ms; }
+.stagger-4 { animation-delay: 120ms; }
+.stagger-5 { animation-delay: 150ms; }
+.stagger-6 { animation-delay: 180ms; }
+.stagger-7 { animation-delay: 210ms; }
+.stagger-8 { animation-delay: 240ms; }
+
+/* Pulse */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-pulse {
+  animation: pulse 2s var(--ease-in-out) infinite;
+}
+
+/* Skeleton shimmer - premium */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--accent) 25%,
+    var(--accent-hover) 50%,
+    var(--accent) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s var(--ease-in-out) infinite;
+  border-radius: var(--radius-md);
+}
+
+/* Spin */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Subtle float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-float {
+  animation: float 3s var(--ease-in-out) infinite;
+}
+
+/* Glow pulse */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(109, 40, 217, 0); }
+  50% { box-shadow: 0 0 20px 4px rgba(109, 40, 217, 0.15); }
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2s var(--ease-in-out) infinite;
+}
+
+/* ============================================
+   SCROLLBAR STYLING - Refined
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-lighter);
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  background-clip: content-box;
+  transition: background var(--duration-150) var(--ease-out);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-light);
+  background-clip: content-box;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--muted-lighter);
+  background-clip: content-box;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+  background-clip: content-box;
+}
+
+/* ============================================
+   FOCUS STYLES
+   ============================================ */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for form inputs - they don't need it */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+}
+
+/* Remove focus outline for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================
+   SELECTION STYLES - Luxe
+   ============================================ */
+::selection {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+[data-theme="dark"] ::selection {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+/* ============================================
+   TYPOGRAPHY UTILITIES
+   ============================================ */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Premium gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, var(--primary), var(--primary-hover)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Gold gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--accent-gold), #D4A00A) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* ============================================
+   OVERLAY BACKDROP
+   ============================================ */
+.overlay-backdrop {
+  background: var(--overlay);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ============================================
+   GLASS EFFECT - Premium
+   ============================================ */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+/* Frosted glass variant */
+.glass-frosted {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid var(--glass-border);
+}
+
+/* ============================================
+   PREMIUM DECORATIVE ELEMENTS
+   ============================================ */
+
+/* Subtle gradient border */
+.border-gradient {
+  position: relative;
+  border: none;
+}
+
+.border-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--primary), var(--accent-gold));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Noise texture overlay for depth */
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+[data-theme="dark"] .noise-overlay::after {
+  opacity: 0.03;
+}
+
+/* ============================================
+   MONO FONT SLASHED ZERO - Must be at end for specificity
+   JetBrains Mono uses a slashed zero (diagonal line)
+   ============================================ */
+[class~="font-mono"] {
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, monospace !important;
+  font-feature-settings: "zero" 1 !important;
+}
