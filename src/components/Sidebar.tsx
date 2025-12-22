@@ -9,8 +9,8 @@ import {
   PanelLeftClose,
   PanelLeft,
   Palette,
-  Sparkles,
 } from "lucide-react";
+import Image from "next/image";
 import { ThemeToggle } from "./ThemeToggle";
 import {
   HoverMenu,
@@ -93,8 +93,14 @@ export function Sidebar() {
         {isCollapsed ? (
           <HoverMenu>
             <HoverMenuTrigger className="!p-0 !border-0 !bg-transparent">
-              <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center flex-shrink-0">
-                <Sparkles size={18} className="text-[#FFFFFC]" />
+              <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center flex-shrink-0 p-1.5">
+                <Image
+                  src="/canarycanarylogo-white.svg"
+                  alt="Canary Canary"
+                  width={20}
+                  height={20}
+                  className="w-full h-full object-contain"
+                />
               </div>
             </HoverMenuTrigger>
             <HoverMenuContent side="right" align="start">
@@ -109,10 +115,16 @@ export function Sidebar() {
         ) : (
           <>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center flex-shrink-0">
-                <Sparkles size={18} className="text-[#FFFFFC]" />
+              <div className="w-8 h-8 bg-[var(--primary)] rounded-lg flex items-center justify-center flex-shrink-0 p-1.5">
+                <Image
+                  src="/canarycanarylogo-white.svg"
+                  alt="Canary Canary"
+                  width={20}
+                  height={20}
+                  className="w-full h-full object-contain"
+                />
               </div>
-              <span className="font-semibold text-lg tracking-tight">Canary</span>
+              <span className="font-semibold text-lg tracking-tight">Canary Canary</span>
             </div>
             <button
               onClick={() => setIsCollapsed(true)}
