@@ -9,6 +9,7 @@ import {
   PanelLeftClose,
   PanelLeft,
   Palette,
+  Presentation,
 } from "lucide-react";
 import Image from "next/image";
 import { ThemeToggle } from "./ThemeToggle";
@@ -171,7 +172,12 @@ export function Sidebar() {
           isCollapsed={isCollapsed}
         />
 
-        {/* Add your navigation items here */}
+        <NavItem
+          href="/slides"
+          icon={<Presentation size={20} />}
+          label="Slides"
+          isCollapsed={isCollapsed}
+        />
       </nav>
 
       {/* Bottom section */}
