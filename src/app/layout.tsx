@@ -1,18 +1,11 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ToastProvider } from "@/components/ui/Toast";
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
 export const metadata: Metadata = {
-  title: "Canary Template",
-  description: "A premium Next.js template with refined UI components",
+  title: "Canary Canary × Payva",
+  description: "Product Mock-Up Presentation — Initial Concepts",
 };
 
 export default function RootLayout({
@@ -23,9 +16,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Switzer from Fontshare - refined neo-grotesque for body/display */}
+        {/* Switzer from Fontshare */}
         <link
           href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap"
+          rel="stylesheet"
+        />
+        {/* JetBrains Mono from CDN */}
+        <link
+          href="https://fonts.cdnfonts.com/css/jetbrains-mono-2"
           rel="stylesheet"
         />
         <script
@@ -43,7 +41,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${jetbrainsMono.variable} antialiased`}>
+      <body className="antialiased">
         <ThemeProvider defaultTheme="system">
           <ToastProvider>{children}</ToastProvider>
         </ThemeProvider>
