@@ -575,6 +575,15 @@ export default function PayvaPresentation() {
             moving. We&apos;ll have concepts back to you fast.
           </p>
 
+          <a
+            href="https://cal.com/canarycanary/consultation"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-8"
+          >
+            <TexturedButton>Schedule a Call</TexturedButton>
+          </a>
+
           <div className="mt-10 flex items-center justify-center gap-4">
             <Image
               src="/canarycanarylogo.svg"
